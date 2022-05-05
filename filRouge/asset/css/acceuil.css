@@ -1,0 +1,100 @@
+
+/* Logo site web */
+
+#logo{
+    width: 10em;
+    height: auto;
+}
+
+
+
+/* mode nuit changement de couleur */
+modeNuit{
+    background-color: black;
+    color:white;
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(15, 228, 192);
+    box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    color: aliceblue;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px;
+}
+
+footer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(26, 160, 194);
+    box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    margin: 15px;
+    padding: 15px;
+    color: aliceblue;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px;
+}
+
+/* ------------ article --------------*/
+article{
+    background-color: rgb(20, 180, 243);
+    width: 250px;
+    height: auto;
+    padding: 2px;
+    margin: 50px;
+    border-radius: 5px 5px;
+    box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+}
+
+
+/* ---------------- bouton----------------- */
+
+/* input:hover{
+    
+    animation: animationBouton alternate infinite 2s;
+} */
+
+/*grid du contenu*/
+
+
+div#container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+#articleUn{
+    grid-column: 1;
+    grid-row: 1;
+
+}
+
+#slider{
+    grid-column: 2;
+    grid-row: 2;
+
+}
+
+#articleDeux{
+    grid-column: 3;
+    grid-row:3 ;    
+}
+
+
+
+/* Animation keyframes */
+
+/* @keyframes animationBouton {
+    0%{
+        transform: rotate(10deg);
+    }
+
+    100%{
+        transform: rotate(-10deg);
+    }
+    
+} */
