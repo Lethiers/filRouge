@@ -23,7 +23,9 @@ if (isset($_POST['pseudo_util'])&& !empty($_POST['pseudo_util'])&&isset($_POST['
 
         $connexion = $utilisateur->checkUser($bdd,$_POST['pseudo_util'],$hash);
         if (!empty($connexion)) {
+            var_dump($connexion);
             $_SESSION['id'] = $connexion[0]->id_util;
+            $_SESSION['pseudo'] = $connexion[0]->pseudo_util;
             echo 'bienvenue '.$_POST['pseudo_util'].'!';
             header('Location:compte');
     

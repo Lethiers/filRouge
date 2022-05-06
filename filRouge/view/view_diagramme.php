@@ -8,25 +8,21 @@
 </head>
 <body>
     <div>
-    <form action="" method="post">
-        <input type="text" name="name_diagramme" placeholder="nom diagramme">
-        <input type="submit" value="ajouter un diagramme">
-    </form>
-    <form action="" method="post">
-        <p>ajouter un revenu :</p>
-        <input type="text" name="nom_revenu" placeholder="nom revenu">
-        <input type="number" name="montant_revenu" placeholder="montant revenu">
-        <input type="submit" value="ajouter un revenu" name="revenu">
-    </form>
-    <form action="" method="post">
-        <p>ajouter une dépense :</p>
-        <input type="text" name="nom_depense" placeholder="nom depense">
-        <input type="number" name="montant_depense" placeholder="montant depense">
-        <input type="submit" value="ajouter une dépense" name="depense">
-    </form>
-
-
+        <form action="" method="post">
+            <input type="text" name="name_diagramme" placeholder="nom diagramme">
+            <select name="frequence">
+                <option value="1">jour</option>
+                <option value="2">mois</option>
+                <option value="3">bimestriel</option>
+                <option value="4">trimestriel</option>
+                <option value="5">quadrimestriel</option>
+                <option value="6">semestriel</option>
+                <option value="7">annuel</option>
+                <input type="submit" value="créer un diagramme">
+            </select>
+        </form>
     </div>
+
 
 
     

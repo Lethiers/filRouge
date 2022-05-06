@@ -7,27 +7,45 @@ class Utilisateur{
 /*------------------------------- 
                     ATTRIBUTS
         -------------------------------*/
+
+private $id;
 private $nom;
 private $prenom;
 private $pseudo;
 private $email;
 private $mdp;
+private $droit;
 
 /*------------------------------- 
                     CONSTRUCTEUR
         -------------------------------*/
 
-public function __constructor($nom,$prenom,$pseudo,$email,$mdp){
+public function __constructor($nom,$prenom,$pseudo,$email,$mdp,$droit){
     $this->nom = $nom;
     $this->prenom = $prenom;
     $this->pseudo = $pseudo;
     $this->email = $email;
     $this->mdp = $mdp;
+    $this->droit = $droit;
 }
 
 /*------------------------------- 
                     SETTER ET GETTEUR
         -------------------------------*/
+public function getId():string{
+    return $this->id_util;
+}
+public function setId($id):void{
+    $this->id_util = $id;
+}     
+
+public function getDroit():string{
+    return $this->droit;
+}
+
+public function setDroit($droit):void{
+    $this->droit = $droit;
+}        
 
 public function getNom():string{
     return $this->nom_util;
@@ -72,14 +90,15 @@ public function setMdp($mdp):void{
 public function addUser($bdd){
 
 try {
-    $req = $bdd->prepare('INSERT INTO utilisateur(mdp_util,pseudo_util,nom_util,prenom_util,email_util) 
-    VALUES(:mdp_util,:pseudo_util,:nom_util,:prenom_util,:email_util)');
+    $req = $bdd->prepare('INSERT INTO utilisateur(mdp_util,pseudo_util,nom_util,prenom_util,email_util,id_droit) 
+    VALUES(:mdp_util,:pseudo_util,:nom_util,:prenom_util,:email_util,:id_droit)');
     $req->execute(array(
         ':mdp_util' => $this->getMdp(),
         ':pseudo_util' => $this->getPseudo(),
         ':nom_util' => $this->getNom(),
         ':prenom_util' => $this->getPrenom(),
-        ':email_util' => $this->getEmail()
+        ':email_util' => $this->getEmail(),
+        ':id_droit' => $this->getDroit()
 
     ));
 } catch (Exception $e) {
@@ -152,6 +171,22 @@ public function modifyUser($bdd,$id){
             ':email_util' => $this->getEmail()
         ));
         
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
+
+
+// fonction pour verifier si l email est existant
+public function checkByEmail($bdd,$email){
+    try {
+        $req = $bdd->prepare('SELECT * FROM utilisateur WHERE email_util = :email_util');
+        $req->execute(array(
+            'email_util' => $email
+        ));
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+
     } catch (Exception $e) {
         die('Erreur :' .$e->getMessage());
     }

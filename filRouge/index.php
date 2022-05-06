@@ -10,6 +10,7 @@
         case $path === "/filRouge/acceuil" : 
             include './ctrl/ctrl_acceuil.php';
         break ;
+
         //route / compte
         case $path === "/filRouge/compte":
             include './ctrl/ctrl_compte.php';
@@ -52,6 +53,11 @@
         // route / diagramme
         case $path === "/filRouge/modifyDiagramme":
             include './ctrl/ctrl_modify_diagramme.php';
+
+
+        // route / diagramme
+        case $path === "/filRouge/admin":
+            include './ctrl/ctrl_admin.php';
 		break ;
     }
 ?>

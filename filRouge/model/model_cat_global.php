@@ -18,27 +18,25 @@ public function __constructor($nom_categorie_global){
                     SETTER ET GETTEUR
         -------------------------------*/
 
-
 public function getNom():string{
     return $this->nom_categorie_global;
 }
 public function setNom($nom_categorie_global):void{
     $this->nom_categorie_global = $nom_categorie_global;
 }
+
 /*------------------------------- 
                     METHODES
         -------------------------------*/
-// fonction pour créer une catégorie utilisateur
+// fonction pour créer une catégorie utilisateur OK FONCTIONNE
 public function addCategorieUtil($bdd):void{
     try {
         
         $req = $bdd->prepare('INSERT INTO categorie_global(nom_categorie_global)
         VALUES (:nom_categorie_global)');
         $req->execute(array(
-            ':nom_categorie_global' => $this->getNom()
+            ':nom_categorie_global' => $this->getNom(),
         ));
-
-
 
     } catch (Exception $e) {
         die ('Erreur :' .$e->getMessage());
@@ -46,7 +44,7 @@ public function addCategorieUtil($bdd):void{
 }
 
 // fonction pour afficher toute les categories global
-public function showAllCategorieGlobal($bdd):void{
+public function showAllCategorieGlobal($bdd):array{
     try {
         
         $req = $bdd->prepare('SELECT * FROM categorie_global');
@@ -62,7 +60,7 @@ public function showAllCategorieGlobal($bdd):void{
 }
 
 // fonction pour voir une catégorie global
-public function showCategorieGlobal($bdd,$id):void{
+public function showCategorieGlobal($bdd,$id):array{
     try {
         
         $req = $bdd->prepare('SELECT * FROM categorie_global WHERE id_categorie_global=:id_categorie_global');
@@ -78,7 +76,7 @@ public function showCategorieGlobal($bdd,$id):void{
 }
 
 // supprimer une catégorie global
-public function showCategorieGlobal($bdd,$id):void{
+public function deleteCategorieGlobal($bdd,$id):void{
     try {
         
         $req = $bdd->prepare('DELETE FROM categorie_global WHERE id_categorie_global=:id_categorie_global');
@@ -99,7 +97,7 @@ public function modifyCatGlobal($bdd,$id,$nom){
     try {
         $req = $bdd->prepare('UPDATE categorie_global 
         SET nom_categorie_global=:nom_categorie_global 
-        WHERE id_categorie_global=:id_categorie_global')
+        WHERE id_categorie_global=:id_categorie_global');
         $req->execute(array(
             'nom_categorie_global' => $nom,
             'id_categorie_global' => $id
