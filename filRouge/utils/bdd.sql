@@ -22,7 +22,7 @@ date_operation date,
 montant_operation float,
 nom_operation varchar(50),
 id_categorie_global int not null,
-id_categorie_utilisateur int not null,
+id_categorie_utilisateur int null,
 id_util int not null,
 id_balance int not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -166,7 +166,6 @@ references utilisateur (id_util);
 insert into droit (nom_droit) values 
 ("Utilisateur"),
 ("Admin");
-
 
 insert into frequence (liste_frequence) values 
 ("jour"),

@@ -64,7 +64,9 @@ public function showCategorieGlobal($bdd,$id):array{
     try {
         
         $req = $bdd->prepare('SELECT * FROM categorie_global WHERE id_categorie_global=:id_categorie_global');
-        $req->execute();
+        $req->execute(array(
+            'id_categorie_global' => $id
+        ));
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         return $data;
 
@@ -81,7 +83,7 @@ public function deleteCategorieGlobal($bdd,$id):void{
         
         $req = $bdd->prepare('DELETE FROM categorie_global WHERE id_categorie_global=:id_categorie_global');
         $req->execute(array(
-            'id_operation' =>$id
+            'id_categorie_global' =>$id
         ));
 
 

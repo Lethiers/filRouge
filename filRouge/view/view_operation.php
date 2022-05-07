@@ -14,8 +14,7 @@
         <p>date de l'operation :</p>
         <input type="date" name="date_operation">
         <p>montant de l'operation :</p>
-        <input type="number" name="montant_operation">
-        <input type="submit" value="Enregistrer">
+        <input type="text" name="montant_operation">
 
 
 

@@ -4,19 +4,40 @@ include './utils/connectBdd.php';
 
 // importation model
 include './model/model_operation.php';
+include './model/model_cat_global.php';
+
 
 // ------- importation des view -----
 include './view/view_operation.php';
+
+
 $operation = new Operation(null,null,null);
+
+// voir les categorie global sous forme de checkbox
+$categorieGlobal = new CategoriGlobal(null);
+echo '<select name="catGlobal" id="pet-select">
+<option value="">--merci de selecitonner une catégorie global--</option>';
+$tab = $categorieGlobal->showAllCategorieGlobal($bdd);
+foreach($tab as $value){
+
+    echo '<option value='.$value->id_categorie_global.'>'.$value->nom_categorie_global.'</option>';
+}
+echo '</select>';
+
+echo '<input type="submit" value="Enregistrer">';
+
+var_dump($_POST['cat']);
+
 
 if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation']) 
 && isset($_POST['date_operation']) && !empty($_POST['date_operation']) 
-&& isset($_POST['montant_operation']) && !empty($_POST['montant_operation'])) {
-
+&& isset($_POST['montant_operation']) && !empty($_POST['montant_operation'])
+&& isset($_POST['catGlobal']) && !empty($_POST['catGlobal'])) {
 
 
     $operation->setDate($_POST['date_operation']);
     $operation->setMontant($_POST['montant_operation']);
+    $operation->setNom($_POST['nom_operation']);
     $operation->setNom($_POST['nom_operation']);
 
     $operation->addOperation($bdd);
@@ -25,6 +46,7 @@ if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation'])
 }else {
     echo 'merci de remplir les champs !';
 }
+
 echo '</form>';
 echo '</div>';
 

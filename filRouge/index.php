@@ -58,6 +58,21 @@
         // route / diagramme
         case $path === "/filRouge/admin":
             include './ctrl/ctrl_admin.php';
+
+
+        // route / diagramme
+        case $path === "/filRouge/deleteDiagrammeGlobal":
+            include './ctrl/ctrl_delete_diagramme_global.php';
+        // route / diagramme
+        case $path === "/filRouge/updateDiagrammeGlobal":
+            include './ctrl/ctrl_update_diagramme_global.php';
+
+
+
+
+
+
+
 		break ;
     }
 ?>

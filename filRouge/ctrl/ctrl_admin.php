@@ -33,22 +33,34 @@ echo $message;
 
 $tab = $cat->showAllCategorieGlobal($bdd);
 
-echo '<form action="" method="post">';
 echo '<ul>';
 foreach($tab as $value){
-    echo '<li><input type="checkbox" name='.$value->nom_categorie_global.'><label for='.$value->nom_categorie_global.'>'.$value->nom_categorie_global.'</label></li>';
+
+
+    echo '<li>
+    <label for='.$value->nom_categorie_global.'>'.$value->nom_categorie_global.'</label></br>
+    <a href="updateDiagrammeGlobal?id='.$value->id_categorie_global.'">modifier</a>
+    <a href="deleteDiagrammeGlobal?id='.$value->id_categorie_global.'">supprimer</a>
+    </li>';
 
     
 }
 echo '</ul>';
+// on utilise le retour du ctrl delete pour afficher un message de suppression
+$msg = "";
+if (isset($_GET['supp'])) {
+    $msg = "la catégorie viens d'être supprimer";
+    // ----------------------------------------------------------------------------------- faut rajouter un timer JS
+    // header('Location: admin'); 
+}
 
-echo '<input type="submit" value="supprimer">';
-echo '<input type="submit" value="modifier">';
-echo '</form>';
+if (isset($_GET['modify'])) {
+    $msg = "la catégorie viens d'être modifier";
+    // ----------------------------------------------------------------------------------- faut rajouter un timer JS
+    // header('Location: admin'); 
+}
 
-
-
-
+echo $msg;
 
 
 ?>

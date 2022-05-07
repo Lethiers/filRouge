@@ -10,15 +10,19 @@ class Operation{
 private $date;
 private $montant;
 private $nom;
+private $idCatGlobal;
+private $idBalance;
 
 /*------------------------------- 
                     CONSTRUCTEUR
         -------------------------------*/
 
-public function __constructor($date,$montant,$nom){
+public function __constructor($date,$montant,$nom,$idCatGlobal,$idBalance){
     $this->date = $date;
     $this->montant= $montant;
     $this->nom= $nom;
+    $this->idCatGlobal= $idCatGlobal;
+    $this->idBalance= $idBalance;
 }
 
 /*------------------------------- 
@@ -43,6 +47,20 @@ public function getNom():string{
 public function setNom($montant):void{
     $this->nom_operation = $montant;
 }
+
+public function getidCatGlobal():string{
+    return $this->idCatGlobal;
+}
+public function setidCatGlobal($idCatGlobal):void{
+    $this->idCatGlobal = $idCatGlobal;
+}
+
+public function getidBalance():string{
+    return $this->idCatGlobal;
+}
+public function setidBalance($idBalance):void{
+    $this->idBalance = $idBalance;
+}
 /*------------------------------- 
                     METHODES
         -------------------------------*/
@@ -52,13 +70,14 @@ public function setNom($montant):void{
 public function addOperation($bdd):void{
 
     try {
-        $req = $bdd->prepare('INSERT INTO operation(date_operation,montant_operation,nom_operation)
-        VALUES(:date_operation,:montant_operation,:nom_operation)');
+        $req = $bdd->prepare('INSERT INTO operation(date_operation,montant_operation,nom_operation,id_categorie_global,id_balance)
+        VALUES(:date_operation,:montant_operation,:nom_operation,:id_categorie_global,:id_balance)');
         $req->execute(array(
             ':date_operation' => $this->getDate(),
             ':montant_operation' => $this->getMontant(),
-            ':nom_operation' => $this->getNom()
-
+            ':nom_operation' => $this->getNom(),
+            ':id_categorie_global' => $this->getidCatGlobal(),
+            ':id_balance' => $this->getidBalance()
         ));
     } catch (Exception $e) {
         die ('Erreur :' .$e->getMessage());
