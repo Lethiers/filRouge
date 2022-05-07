@@ -56,7 +56,7 @@ public function setidCatGlobal($idCatGlobal):void{
 }
 
 public function getidBalance():string{
-    return $this->idCatGlobal;
+    return $this->idBalance;
 }
 public function setidBalance($idBalance):void{
     $this->idBalance = $idBalance;
@@ -67,17 +67,18 @@ public function setidBalance($idBalance):void{
 
 
 // fonction pour ajouter une depense        
-public function addOperation($bdd):void{
+public function addOperation($bdd,$id):void{
 
     try {
-        $req = $bdd->prepare('INSERT INTO operation(date_operation,montant_operation,nom_operation,id_categorie_global,id_balance)
-        VALUES(:date_operation,:montant_operation,:nom_operation,:id_categorie_global,:id_balance)');
+        $req = $bdd->prepare('INSERT INTO operation(date_operation,montant_operation,nom_operation,id_categorie_global,id_balance,id_util)
+        VALUES(:date_operation,:montant_operation,:nom_operation,:id_categorie_global,:id_balance,:id_util)');
         $req->execute(array(
             ':date_operation' => $this->getDate(),
             ':montant_operation' => $this->getMontant(),
             ':nom_operation' => $this->getNom(),
             ':id_categorie_global' => $this->getidCatGlobal(),
-            ':id_balance' => $this->getidBalance()
+            ':id_balance' => $this->getidBalance(),
+            ':id_util' => $id
         ));
     } catch (Exception $e) {
         die ('Erreur :' .$e->getMessage());

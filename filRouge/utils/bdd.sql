@@ -167,6 +167,10 @@ insert into droit (nom_droit) values
 ("Utilisateur"),
 ("Admin");
 
+insert into balance (isPositive) values 
+(0),
+(1);
+
 insert into frequence (liste_frequence) values 
 ("jour"),
 ("mois"),
