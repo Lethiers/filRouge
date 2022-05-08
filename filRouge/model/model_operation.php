@@ -55,7 +55,7 @@ public function setidCatGlobal($idCatGlobal):void{
     $this->idCatGlobal = $idCatGlobal;
 }
 
-public function getidBalance():string{
+public function getidBalance():int{
     return $this->idBalance;
 }
 public function setidBalance($idBalance):void{
@@ -152,15 +152,17 @@ public function deleteOperation($bdd,$id):void{
     }
 }
 
-public function modifyOperation($bdd,$id,$nom,$date,$montant):void{
+public function modifyOperation($bdd,$id,$nom,$date,$montant,$idCatGlobal,$idBalance):void{
     try {
         $req = $bdd->prepare('UPDATE operation SET nom_operation=:nom_operation,
-        date_operation=:date_operation, montant_operation= :montant_operation WHERE id_operation = :id_operation');
+        date_operation=:date_operation, montant_operation= :montant_operation, id_categorie_global=:id_categorie_global,id_balance=:id_balance WHERE id_operation = :id_operation');
         $req->execute(array(
             'nom_operation'=> $nom,
             'date_operation'=> $date,
             'montant_operation'=> $montant,
-            'id_operation' =>$id
+            'id_operation' =>$id,
+            ':id_categorie_global' => $idCatGlobal,
+            ':id_balance' => $idBalance
         ));
 
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-var_dump($_SESSION['id']);
+// var_dump($_SESSION['id']);
 // importation bdd
 include './utils/connectBdd.php';
 
@@ -15,14 +15,14 @@ include './view/view_operation.php';
 
 
 $operation = new Operation(null,null,null);
-// selectionner si l'operation est positive ou negative
 
+// selectionner si l'operation est positive ou negative grace à l'id balance
 $balance = new Balance(null);
-
+$tabBalnce = $balance->showAllIsPositive($bdd);
 echo '<select name="positive">
 <option value="">--type de dépense--</option>';
-echo '<option value=true>positive</option>';
-echo '<option value=false>negatif</option>';
+echo '<option value='.$tabBalnce[1]['id_balance'].'>positive</option>';
+echo '<option value='.$tabBalnce[0]['id_balance'].'>negatif</option>';
 echo '</select>';
 
 
@@ -40,7 +40,7 @@ foreach($tab as $value){
 echo '</select>';
 
 echo '<input type="submit" value="Enregistrer">';
-
+////////////////////////// FAIRE CATEGORIE UTILISATEUR //////////////////////////
 
 
 if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation']) 
@@ -49,27 +49,15 @@ if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation'])
 && isset($_POST['catGlobal']) && !empty($_POST['catGlobal']) 
 && isset($_POST['positive']) && !empty($_POST['positive'])) {
 
-
-
-// /////////////////////////////////en  cours de travail //////////////////
     var_dump($_POST['positive']);
 
-    if ($_POST['positive'] == 'true') {
-        var_dump($operation->setidBalance(2));
-    }else {
-        var_dump($operation->setidBalance(1));
-    }
-   // pb de typage voir si on passe en force sans le setteur
-/////////////////////////////////////////////////////////////////////////////////
     $operation->setDate($_POST['date_operation']);
     $operation->setMontant($_POST['montant_operation']);
     $operation->setNom($_POST['nom_operation']);
     $operation->setidCatGlobal($_POST['catGlobal']);
     $operation->setidBalance($_POST['positive']);
 
-    var_dump($operation);
-
-    // $operation->addOperation($bdd,$_SESSION['id']);
+    $operation->addOperation($bdd,$_SESSION['id']);
 
     echo '<p>l\'opération '.$operation->getNom().' pour un montant de '.$operation->getMontant().' est bien enregistré<p>';
 
@@ -80,7 +68,8 @@ if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation'])
 echo '</form>';
 echo '</div>';
 
-// $operation->showAllOperation($bdd);
+$operation->showAllOperation($bdd);
+
 
 
 ?>

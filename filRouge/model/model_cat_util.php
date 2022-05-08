@@ -7,12 +7,16 @@ class CategoriUtil{
         -------------------------------*/
 
 private $nom_categorie_utilisateur;
+private $id_util;
+private $id_categorie_global;
 
 /*------------------------------- 
                     CONSTRUCTEUR
         -------------------------------*/
-public function __constructor($nom_categorie_utilisateur){
+public function __constructor($nom_categorie_utilisateur,$id_util,$id_categorie_global){
     $this->nom_categorie_utilisateur = $nom_categorie_utilisateur;
+    $this->id_util = $id_util;
+    $this->id_categorie_global = $id_categorie_global;
 }
 /*------------------------------- 
                     SETTER ET GETTEUR
@@ -25,6 +29,22 @@ public function getNom():string{
 public function setNom($nom_categorie_utilisateur):void{
     $this->nom_categorie_utilisateur = $nom_categorie_utilisateur;
 }
+
+public function getIdUtil():int{
+    return $this->id_util;
+}
+public function setIdUtil($id_util):void{
+    $this->id_util = $id_util;
+}
+
+public function getCatGlobal():int{
+    return $this->id_categorie_global;
+}
+public function setCatGlobal($id_categorie_global):void{
+    $this->id_categorie_global = $id_categorie_global;
+}
+
+
 /*------------------------------- 
                     METHODES
         -------------------------------*/
@@ -32,10 +52,12 @@ public function setNom($nom_categorie_utilisateur):void{
 public function addCategorieUtil($bdd):void{
     try {
         
-        $req = $bdd->prepare('INSERT INTO categorie_utilisateur(nom_categorie_utilisateur)
-        VALUES (:nom_categorie_utilisateur)');
+        $req = $bdd->prepare('INSERT INTO categorie_utilisateur(nom_categorie_utilisateur,id_util,id_categorie_global)
+        VALUES (:nom_categorie_utilisateur,:id_util,:id_categorie_global)');
         $req->execute(array(
-            ':nom_categorie_utilisateur' => $this->getNom();
+            ':nom_categorie_utilisateur' => $this->getNom(),
+            ':id_util' => $this->getIdUtil(),
+            ':id_categorie_global' => $this->getCatGlobal()
         ));
 
 
@@ -46,7 +68,7 @@ public function addCategorieUtil($bdd):void{
 }
 
 // fonction pour afficher toute les categories utilisateur
-public function showAllCategorieUtil($bdd):void{
+public function showAllCategorieUtil($bdd):array{
     try {
         
         $req = $bdd->prepare('SELECT * FROM categorie_utilisateur');
@@ -61,12 +83,32 @@ public function showAllCategorieUtil($bdd):void{
     }
 }
 
-// fonction pour voir une catégorie utilisateur
-public function showCategorieUtil($bdd,$id):void{
+// fonction pour voir une catégorie utilisateur par utilisateur
+public function showCategorieUtil($bdd,$id):array{
+    try {
+        
+        $req = $bdd->prepare('SELECT * FROM categorie_utilisateur WHERE id_util=:id_util');
+        $req->execute(array(
+            'id_util' =>$id
+        ));
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+
+
+
+    } catch (Exception $e) {
+        die ('Erreur :' .$e->getMessage());
+    }
+}
+
+// fonction pour voir une catégorie utilisateur par utilisateur
+public function showCategorieUtilById($bdd,$id):array{
     try {
         
         $req = $bdd->prepare('SELECT * FROM categorie_utilisateur WHERE id_categorie_utilisateur=:id_categorie_utilisateur');
-        $req->execute();
+        $req->execute(array(
+            'id_categorie_utilisateur' =>$id
+        ));
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         return $data;
 
@@ -78,13 +120,14 @@ public function showCategorieUtil($bdd,$id):void{
 }
 
 // supprimer une catégorie utilisateur
-public function showCategorieUtil($bdd,$id):void{
+public function deleteCategorieUtil($bdd,$id):void{
     try {
         
         $req = $bdd->prepare('DELETE FROM categorie_utilisateur WHERE id_categorie_utilisateur=:id_categorie_utilisateur');
         $req->execute(array(
-            'id_operation' =>$id
+            'id_categorie_utilisateur' =>$id
         ));
+        
 
 
 
@@ -95,14 +138,15 @@ public function showCategorieUtil($bdd,$id):void{
 }
 
 // fonction pour modifier une catégorie utilisateur
-public function modifyCatUtil($bdd,$id,$nom){
+public function modifyCatUtil($bdd,$id){
     try {
-        $req = $bdd->prepare('UPDATE categorie_utilisateur 
-        SET nom_categorie_utilisateur=:nom_categorie_utilisateur 
-        WHERE id_categorie_utilisateur=:id_categorie_utilisateur')
+        $req = $bdd->prepare('UPDATE categorie_utilisateur SET nom_categorie_utilisateur=:nom_categorie_utilisateur, 
+        id_categorie_global=:id_categorie_global, id_util=:id_util WHERE id_categorie_utilisateur=:id_categorie_utilisateur');
         $req->execute(array(
-            'nom_categorie_utilisateur' => $nom,
-            'id_categorie_utilisateur' => $id
+            'nom_categorie_utilisateur' => $this->getNom(),
+            'id_categorie_utilisateur' => $id,
+            'id_categorie_global' => $this->getCatGlobal(),
+            'id_util' => $this->getIdUtil()
         ));
 
 

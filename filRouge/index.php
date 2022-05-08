@@ -63,14 +63,25 @@
         // route / diagramme
         case $path === "/filRouge/deleteDiagrammeGlobal":
             include './ctrl/ctrl_delete_diagramme_global.php';
+
+
         // route / diagramme
         case $path === "/filRouge/updateDiagrammeGlobal":
             include './ctrl/ctrl_update_diagramme_global.php';
 
 
+        // route / diagramme
+        case $path === "/filRouge/deleteCategorieUtilisateur":
+            include './ctrl/ctrl_delete_cat_util.php';
 
 
+        // route / diagramme
+        case $path === "/filRouge/updateCategorieUtilisateur":
+            include './ctrl/ctrl_update_cat_util.php';
 
+        // route / diagramme
+        case $path === "/filRouge/categorieUtilisateur":
+            include './ctrl/ctrl_cat_util.php';
 
 
 		break ;

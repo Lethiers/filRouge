@@ -51,12 +51,12 @@ public function modifyIsPositive($bdd,$id):void{
 }
 
 // fonction pour voir toutes les balance
-public function showAllIsPositive($bdd,$id){
+public function showAllIsPositive($bdd){
         try {
-                $req = $bdd->prepare('SELECT * FROM balance WHERE id_balance=:id_balance');
-                $req->execute(array(
-                        'id_balance' => $id
-                ));
+                $req = $bdd->prepare('SELECT * FROM balance');
+                $req->execute();
+                $data = $req->fetchAll(PDO::FETCH_ASSOC);
+                return $data;
         } catch (Exception $e) {
                 die('Erreur :' .$e->getMessage());
         }
