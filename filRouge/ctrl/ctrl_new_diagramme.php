@@ -14,8 +14,18 @@ include './model/model_revenu.php';
 //-----------------model depense
 include './model/model_depense.php';
 
+//-----------------model depense
+include './model/model_cat_global.php';
+
+
+//-----------------model ajouter
+include './model/model_ajouter.php';
+//-----------------model avoir
+include './model/model_avoir.php';
+
 // ------- importation des view -----
 include './view/view_diagramme.php';
+
 
 $message ="";
 // formulaire pour créer un nouveau diagramme
@@ -63,6 +73,60 @@ if (isset($_GET['diagramme'])) {
         echo '<li>'.$value->nom_diagramme.'</li>';
         echo '<li><a href="modifyDiagramme?id='.$value->id_diagramme.'">modifier</a></li>';
         echo '<li><a href="modifyDiagramme?supp='.$value->id_diagramme.'">supprmier</a></li>';
+
+
+
+        /////////////////////////////////////////// AJOUT TABLE AVOIR ///////////////////////
+
+
+$ajouter= new avoir();
+
+$liste = $ajouter->showAllAvoirByDiag($bdd,$_GET['diagramme']);
+foreach($liste as $value){
+    echo '<li>'.$value->budget.'</li>';
+    ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+    ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+    ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+    ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+    echo '<li><a href="modifyDiagramme?id='.$value->id_diagramme.'">modifier</a></li>';
+    echo '<li><a href="modifyDiagramme?supp='.$value->id_diagramme.'">supprmier</a></li>';
+}
+
+
+
+///////////////////// AJOUTER UNE PREVISION GLOBAL ///////////////////////////////
+// voir les categorie global sous forme de menu
+// debut form
+echo '<form action="" method="post">';
+echo '<p>Budget alloué</p>
+<input type="text" name="budget">';
+
+
+///////////////////////////////////////////////////////// LISTE DEROULANTE CAT GLOBAL /////////////////////
+$categorieGlobal = new CategoriGlobal(null);
+echo '<select name="catGlobal">
+<option value="">--merci de selecitonner une catégorie global--</option>';
+$tab = $categorieGlobal->showAllCategorieGlobal($bdd);
+foreach($tab as $value){
+
+    echo '<option value='.$value->id_categorie_global.'>'.$value->nom_categorie_global.'</option>';
+}
+echo '</select>';
+// fin duformulaire ////////////////
+echo '<input type="submit" value="ajouter une depense">
+</form>
+</div>';
+if (isset($_POST['budget'])&& !empty($_POST['budget'])&& isset($_POST['catGlobal'])&& !empty($_POST['catGlobal'])) {
+    $ajouter= new avoir();
+    $ajouter->setIdDiag($_GET['diagramme']);
+    $ajouter->setIdCat($_POST['catGlobal']);
+    $ajouter->setBudget($_POST['budget']);
+    var_dump($ajouter);
+    $ajouter->addAvoir($bdd);
+}
+///////////////////////////////// FIN TABLE AVOIR ////////////////////////////////////////
+
+
     }
     echo '</ul>';
 

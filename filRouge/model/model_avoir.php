@@ -33,7 +33,7 @@ class Avoir{
     }
 
 
-    public function getBudget():string{
+    public function getBudget():float{
         return $this->budget;
     }
     public function setBudget($budget):void{
@@ -46,12 +46,12 @@ class Avoir{
     // methode pour ajouter un budget entre diagramme et categorie total
 public function addAvoir($bdd):void{
     try {
-        $req=$bdd->prepare('INSERT INTO ajouter (id_diagramme,id_categorie_global,budget)
+        $req=$bdd->prepare('INSERT INTO avoir (id_diagramme,id_categorie_global,budget)
         VALUES(:id_diagramme,:id_categorie_global,:budget)');
         $req->execute(array(
             'id_diagramme' => $this->getIdDiag(),
             'id_categorie_global' => $this->getIdCat(),
-            'budget' => $this-> $this->getBudget()
+            'budget' => $this->getBudget()
         ));
     } catch (Exception $e) {
         die('Erreur :' .$e->getMessage());
@@ -61,7 +61,7 @@ public function addAvoir($bdd):void{
     // methode pour afficher tout les budget
 public function showAllAvoir($bdd):array{
     try {
-        $req=$bdd->prepare('SELECT * FROM ajouter');
+        $req=$bdd->prepare('SELECT * FROM avoir');
         $req->execute();
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         return $data;
@@ -72,7 +72,7 @@ public function showAllAvoir($bdd):array{
 // methode pour afficher tout les budget par id diag
 public function showAllAvoirByDiag($bdd,$id):array{
     try {
-        $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_diagramme=:id_diagramme');
+        $req=$bdd->prepare('SELECT * FROM avoir WHERE id_diagramme=:id_diagramme');
         $req->execute(array(
             'id_diagramme'=> $id
         ));
@@ -87,7 +87,7 @@ public function showAllAvoirByDiag($bdd,$id):array{
 // methode pour afficher tout les budget par id cat util
 public function showAllAvoirByCatUtil($bdd,$id):array{
     try {
-        $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_categorie_global=:id_categorie_global');
+        $req=$bdd->prepare('SELECT * FROM avoir WHERE id_categorie_global=:id_categorie_global');
         $req->execute(array(
             'id_categorie_global'=> $id
         ));
@@ -103,7 +103,7 @@ public function showAllAvoirByCatUtil($bdd,$id):array{
 public function deleteIdCat($bdd,$id_diagramme):void{
     try {
         
-        $req = $bdd->prepare('DELETE FROM ajouter WHERE id_categorie_global=:id_categorie_global');
+        $req = $bdd->prepare('DELETE FROM avoir WHERE id_categorie_global=:id_categorie_global');
         $req->execute(array(
             'id_categorie_global' =>$id
         ));
@@ -118,7 +118,7 @@ public function deleteIdCat($bdd,$id_diagramme):void{
 public function deleteDiagramme($bdd,$id_diagramme):void{
     try {
         
-        $req = $bdd->prepare('DELETE FROM ajouter WHERE id_diagramme=:id_diagramme');
+        $req = $bdd->prepare('DELETE FROM avoir WHERE id_diagramme=:id_diagramme');
         $req->execute(array(
             'id_diagramme' =>$id
         ));
@@ -132,7 +132,7 @@ public function deleteDiagramme($bdd,$id_diagramme):void{
 // methode pour modifier
 public function modifyAvoir($bdd):void{
     try {
-        $req = $bdd->prepare('UPDATE ajouter SET id_diagramme=:id_diagramme,id_categorie_global=:id_categorie_global,budget=:budget
+        $req = $bdd->prepare('UPDATE avoir SET id_diagramme=:id_diagramme,id_categorie_global=:id_categorie_global,budget=:budget
         WHERE id_categorie_global=:id_categorie_global');
         $req->execute(array(
             'id_categorie_global' => $this->getIdCat(),
