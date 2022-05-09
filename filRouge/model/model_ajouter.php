@@ -132,8 +132,7 @@ public function deleteDiagramme($bdd,$id_diagramme):void{
 // methode pour modifier
 public function modifyAjouter($bdd):void{
     try {
-        $req = $bdd->prepare('UPDATE ajouter SET id_diagramme=:id_diagramme,id_categorie_utilisateur=:id_categorie_utilisateur,budget=:budget
-        WHERE id_categorie_utilisateur=:id_categorie_utilisateur');
+        $req = $bdd->prepare('UPDATE ajouter SET budget=:budget WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_diagramme=:id_diagramme');
         $req->execute(array(
             'id_categorie_utilisateur' => $this->getIdCat(),
             'budget' => $this->getBudget(),
@@ -145,7 +144,35 @@ public function modifyAjouter($bdd):void{
     }
 }
 
+// methode pour supprimer par id cat et id diagramme
+public function deleteAjouterIdCatIdDiag($bdd,$idCat,$idDiag):void{
+    try {
+        $req=$bdd->prepare('DELETE FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_diagramme=:id_diagramme');
+        $req->execute(array(
+            'id_categorie_utilisateur'=> $idCat,
+            'id_diagramme'=> $idDiag
+        ));
 
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
+
+// methode pour afficher un budget par id cat et id diagramme
+public function showAjouterIdCatIdDiag($bdd,$idCat,$idDiag):array{
+    try {
+        $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_diagramme=:id_diagramme ');
+        $req->execute(array(
+            'id_categorie_utilisateur'=> $idCat,
+            'id_diagramme'=> $idDiag
+        ));
+
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
 
 
 

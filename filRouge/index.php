@@ -28,18 +28,20 @@
         case $path === "/filRouge/operation":
             include './ctrl/ctrl_operation.php';
 		break ;
-        //route / operation
+        //route / supprimer -- operation
         case $path === "/filRouge/supprimerOperation":
             include './ctrl/ctrl_suppressionOperation.php';
 		break ;
-        //route / operation
+        //route / modifier -- operation
         case $path === "/filRouge/modifierOperation":
             include './ctrl/ctrl_modifierOperation.php';
 		break ;
+
         // route / deconnexion
         case $path === "/filRouge/deconnexion":
             include './ctrl/ctrl_deconnexion.php';
 		break ;
+
         // route / contacter
         case $path === "/filRouge/contact":
             include './ctrl/ctrl_contact.php';
@@ -50,39 +52,49 @@
             include './ctrl/ctrl_new_diagramme.php';
 		break ;
 
-        // route / diagramme
+        // route / modifier -- diagramme
         case $path === "/filRouge/modifyDiagramme":
             include './ctrl/ctrl_modify_diagramme.php';
 
 
-        // route / diagramme
+        // route / admin
         case $path === "/filRouge/admin":
             include './ctrl/ctrl_admin.php';
 
 
-        // route / diagramme
+        // route / supprimer un diagramme
         case $path === "/filRouge/deleteDiagrammeGlobal":
             include './ctrl/ctrl_delete_diagramme_global.php';
 
 
-        // route / diagramme
+        // route / modifier un diagramme
         case $path === "/filRouge/updateDiagrammeGlobal":
             include './ctrl/ctrl_update_diagramme_global.php';
 
 
-        // route / diagramme
+        // route / supprimer categorie utilisateur
         case $path === "/filRouge/deleteCategorieUtilisateur":
             include './ctrl/ctrl_delete_cat_util.php';
 
 
-        // route / diagramme
+        // route / modifier categorie utilisateur
         case $path === "/filRouge/updateCategorieUtilisateur":
             include './ctrl/ctrl_update_cat_util.php';
 
-        // route / diagramme
+        // route / categorie utilisateur
         case $path === "/filRouge/categorieUtilisateur":
             include './ctrl/ctrl_cat_util.php';
 
+            ///////////////////////////////////TEST////////////////////////////////////////////
+
+        // route / modifier/supprimer table avoir
+        case $path === "/filRouge/modifierDepenseGlobal":
+            include './ctrl/ctrl_modifier_avoir.php';
+
+        // route / modifier/supprimer table ajouter 
+        case $path === "/filRouge/modifierDepenseUtil":
+            include './ctrl/ctrl_modifier_ajouter.php';
+///////////////////////////////////TEST////////////////////////////////////////////
 
 		break ;
     }

@@ -132,8 +132,7 @@ public function deleteDiagramme($bdd,$id_diagramme):void{
 // methode pour modifier
 public function modifyAvoir($bdd):void{
     try {
-        $req = $bdd->prepare('UPDATE avoir SET id_diagramme=:id_diagramme,id_categorie_global=:id_categorie_global,budget=:budget
-        WHERE id_categorie_global=:id_categorie_global');
+        $req = $bdd->prepare('UPDATE avoir SET budget=:budget WHERE id_categorie_global=:id_categorie_global AND id_diagramme=:id_diagramme');
         $req->execute(array(
             'id_categorie_global' => $this->getIdCat(),
             'budget' => $this->getBudget(),
@@ -145,7 +144,35 @@ public function modifyAvoir($bdd):void{
     }
 }
 
+// methode pour afficher un budget par id cat et id diagramme
+public function showAvoirIdCatIdDiag($bdd,$idCat,$idDiag):array{
+    try {
+        $req=$bdd->prepare('SELECT * FROM avoir WHERE id_categorie_global=:id_categorie_global AND id_diagramme=:id_diagramme ');
+        $req->execute(array(
+            'id_categorie_global'=> $idCat,
+            'id_diagramme'=> $idDiag
+        ));
 
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
+
+// methode pour supprimer par id cat et id diagramme
+public function deleteAvoirIdCatIdDiag($bdd,$idCat,$idDiag):void{
+    try {
+        $req=$bdd->prepare('DELETE FROM avoir WHERE id_categorie_global=:id_categorie_global AND id_diagramme=:id_diagramme ');
+        $req->execute(array(
+            'id_categorie_global'=> $idCat,
+            'id_diagramme'=> $idDiag
+        ));
+
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
 
 
 

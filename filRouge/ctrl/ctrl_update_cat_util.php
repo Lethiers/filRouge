@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
     }
 }
 
-var_dump($_POST['nom_categorie_utilisateur']);
+
 
 if (isset($_POST['nom_categorie_utilisateur']) && !empty($_POST['nom_categorie_utilisateur']) && isset($_POST['catGlobal']) && !empty($_POST['catGlobal'])) {
     $catUtil->setNom($_POST['nom_categorie_utilisateur']);

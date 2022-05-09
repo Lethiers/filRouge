@@ -1,43 +1,50 @@
 <?php
 session_start();
-var_dump( $_SESSION['id']);
 // importation bdd
 include './utils/connectBdd.php';
-// importation model
 
+// importation model
 //-----------------model diagramme
 include './model/model_diagramme.php';
 
 //-----------------model revenu
-include './model/model_revenu.php';
+/*****Obsolete table inexistante normalement */
+// include './model/model_revenu.php';
 
 //-----------------model depense
-include './model/model_depense.php';
+/*****Obsolete table inexistante normalement */
+// include './model/model_depense.php';
 
+
+/*********************LES CATEGORIES******* */
 //-----------------model cat global
 include './model/model_cat_global.php';
-
 //-----------------model cat util
 include './model/model_cat_util.php';
+/*********************LES CATEGORIES******* */
 
 
+/*********************LES TABLES ASSOCIATIONS ******* */
 //-----------------model ajouter
 include './model/model_ajouter.php';
-
-
 //-----------------model avoir
 include './model/model_avoir.php';
+/*********************LES TABLES ASSOCIATIONS ******* */
 
 // ------- importation des view -----
 include './view/view_diagramme.php';
 
 
 $message ="";
+
+// initialise objet diagramme
+$diag= new Diagramme();
 // formulaire pour créer un nouveau diagramme
 if (isset($_POST['name_diagramme']) && !empty($_POST['name_diagramme'])) {
-    $diag= new Diagramme();
+
     // ajout id util
     $diag->setIdUtil($_SESSION['id']);
+
     // ajout id frequence ATTENTION si besoin d'ajout il faut modifier le select
     $diag->setIdFrequence($_POST['frequence']);
     $diag->setNom($_POST['name_diagramme']);
@@ -48,12 +55,7 @@ if (isset($_POST['name_diagramme']) && !empty($_POST['name_diagramme'])) {
 }
 echo $message;
 
-
-
-
 // afficher la liste des diagramme
-
-$diag= new Diagramme();
 $tab = $diag->showAllDiagramme($bdd);
 
 echo '<form action="" method="get">';
@@ -68,7 +70,7 @@ echo '</form>';
 
 
 if (isset($_GET['diagramme'])) {
-    $diag= new Diagramme();
+
     $tab = $diag->showDiagramme($bdd,$_GET['diagramme']);
 
 
@@ -81,34 +83,36 @@ if (isset($_GET['diagramme'])) {
 
 
 
-        /////////////////////////////////////////// TABLE AVOIR ///////////////////////
+            // instancier obget cat global
+        $categorieGlobal = new CategoriGlobal(null);
+            // instancier obget cat util
+        $categorieUtil = new CategoriUtil(null);
 
-        // instancier obget cat global
-$categorieGlobal = new CategoriGlobal(null);
-        // instancier obget cat util
-$categorieUtil = new CategoriUtil(null);
+        //////////////////////////// CEST OK AU DESSUS ////////////////////////////
 
-/********************EN COURS *********************************** */
-$avoir= new Avoir();
+ /////////////////////////////////////////// TABLE AVOIR ///////////////////////
+        $avoir= new Avoir();
 
 
-$liste = $avoir->showAllAvoirByDiag($bdd,$_GET['diagramme']);
-foreach($liste as $value){
+        $liste = $avoir->showAllAvoirByDiag($bdd,$_GET['diagramme']);
 
-    /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  *****************/
-    $listeCatGlobal = $categorieGlobal->showCategorieGlobalTablo($bdd);
 
-    echo '<li>'.$listeCatGlobal[($value->id_categorie_global)-1]["nom_categorie_global"].'</li>';
+        foreach($liste as $value){
 
-    /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  ***************/
+            /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  *****************/
+            $nomCatGlobal = $categorieGlobal->showCategorieGlobalTablo($bdd);
 
-    echo '<li>'.$value->budget.'</li>';
-    // var_dump($liste);
-    ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-    ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-    echo '<li><a href="modifyDiagramme?id='.$value->id_diagramme.'">modifier</a></li>';
-    echo '<li><a href="modifyDiagramme?supp='.$value->id_diagramme.'">supprmier</a></li>';
-}
+            echo '<li>'.$nomCatGlobal[($value->id_categorie_global)-1]["nom_categorie_global"].'</li>';
+var_dump($nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"]);
+            /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  ***************/
+
+            echo '<li>'.$value->budget.'</li>';
+
+            ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+            ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+            echo '<li><a href="modifierDepenseGlobal?idDiag='.$value->id_diagramme.'&idCat='.$nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"].'">modifier</a></li>';
+            echo '<li><a href="modifierDepenseGlobal?suppDiag='.$value->id_diagramme.'&idCat='.$nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"].'">supprmier</a></li>';
+        }
 
 
         /////////////////////////////////////////// TABLE AJOUTER ///////////////////////
@@ -124,18 +128,16 @@ foreach($liste as $value){
         /****************** TROUVER NON CAT util   *****************/
         $listeCatUtil = $categorieUtil->showCategorieUtilTablo($bdd,$_SESSION['id']);
         echo 'liste de l util <br>';
-        // var_dump($listeCatUtil);
-        // echo '<br>';
-        // var_dump($value->id_categorie_utilisateur);
+
         echo '<li>'.$listeCatUtil[($value->id_categorie_utilisateur)-1]["nom_categorie_utilisateur"].'</li>';
-    
+
         /****************** TROUVER NON CAT util  ***************/
     echo '<li>'.$value->budget.'</li>';
 
     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-    echo '<li><a href="modifyDiagramme?id='.$value->id_diagramme.'">modifier</a></li>';
-    echo '<li><a href="modifyDiagramme?supp='.$value->id_diagramme.'">supprmier</a></li>';
+    echo '<li><a href="modifierDepenseUtil?idDiag='.$value->id_diagramme.'&idCat='.$listeCatUtil[($value->id_categorie_utilisateur)-1]["id_categorie_utilisateur"].'">modifier</a></li>';
+    echo '<li><a href="modifierDepenseUtil?suppDiag='.$value->id_diagramme.'&idCat='.$listeCatUtil[($value->id_categorie_utilisateur)-1]["id_categorie_utilisateur"].'">supprimer</a></li>';
 }
 
 
