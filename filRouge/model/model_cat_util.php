@@ -83,6 +83,24 @@ public function showAllCategorieUtil($bdd):array{
     }
 }
 
+// fonction pour voir une catégorie UTIL TABLO ASSOC
+public function showCategorieUtilTablo($bdd,$id):array{
+    try {
+        
+        $req = $bdd->prepare('SELECT * FROM categorie_utilisateur WHERE id_util=:id_util');
+        $req->execute(array(
+            'id_util' => $id
+        ));
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+
+
+
+    } catch (Exception $e) {
+        die ('Erreur :' .$e->getMessage());
+    }
+}
+
 // fonction pour voir une catégorie utilisateur par utilisateur
 public function showCategorieUtil($bdd,$id):array{
     try {

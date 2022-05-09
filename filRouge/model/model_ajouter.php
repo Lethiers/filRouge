@@ -51,7 +51,7 @@ public function addAjouter($bdd):void{
         $req->execute(array(
             'id_diagramme' => $this->getIdDiag(),
             'id_categorie_utilisateur' => $this->getIdCat(),
-            'budget' => $this-> $this->getBudget()
+            'budget' => $this->getBudget()
         ));
     } catch (Exception $e) {
         die('Erreur :' .$e->getMessage());

@@ -77,6 +77,22 @@ public function showCategorieGlobal($bdd,$id):array{
     }
 }
 
+// fonction pour voir une catégorie global TABLO ASSOC
+public function showCategorieGlobalTablo($bdd):array{
+    try {
+        
+        $req = $bdd->prepare('SELECT * FROM categorie_global');
+        $req->execute();
+        $data = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+
+
+
+    } catch (Exception $e) {
+        die ('Erreur :' .$e->getMessage());
+    }
+}
+
 // supprimer une catégorie global
 public function deleteCategorieGlobal($bdd,$id):void{
     try {

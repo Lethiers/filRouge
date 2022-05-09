@@ -14,12 +14,17 @@ include './model/model_revenu.php';
 //-----------------model depense
 include './model/model_depense.php';
 
-//-----------------model depense
+//-----------------model cat global
 include './model/model_cat_global.php';
+
+//-----------------model cat util
+include './model/model_cat_util.php';
 
 
 //-----------------model ajouter
 include './model/model_ajouter.php';
+
+
 //-----------------model avoir
 include './model/model_avoir.php';
 
@@ -76,16 +81,57 @@ if (isset($_GET['diagramme'])) {
 
 
 
-        /////////////////////////////////////////// AJOUT TABLE AVOIR ///////////////////////
+        /////////////////////////////////////////// TABLE AVOIR ///////////////////////
+
+        // instancier obget cat global
+$categorieGlobal = new CategoriGlobal(null);
+        // instancier obget cat util
+$categorieUtil = new CategoriUtil(null);
+
+/********************EN COURS *********************************** */
+$avoir= new Avoir();
 
 
-$ajouter= new avoir();
-
-$liste = $ajouter->showAllAvoirByDiag($bdd,$_GET['diagramme']);
+$liste = $avoir->showAllAvoirByDiag($bdd,$_GET['diagramme']);
 foreach($liste as $value){
+
+    /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  *****************/
+    $listeCatGlobal = $categorieGlobal->showCategorieGlobalTablo($bdd);
+
+    echo '<li>'.$listeCatGlobal[($value->id_categorie_global)-1]["nom_categorie_global"].'</li>';
+
+    /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  ***************/
+
     echo '<li>'.$value->budget.'</li>';
+    // var_dump($liste);
     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
+    echo '<li><a href="modifyDiagramme?id='.$value->id_diagramme.'">modifier</a></li>';
+    echo '<li><a href="modifyDiagramme?supp='.$value->id_diagramme.'">supprmier</a></li>';
+}
+
+
+        /////////////////////////////////////////// TABLE AJOUTER ///////////////////////
+
+
+        /********************************modifier le nom */
+$ajouter= new Ajouter();
+
+$liste = $ajouter->showAllAjouterByDiag($bdd,$_GET['diagramme']);
+// var_dump($liste);
+foreach($liste as $value){
+
+        /****************** TROUVER NON CAT util   *****************/
+        $listeCatUtil = $categorieUtil->showCategorieUtilTablo($bdd,$_SESSION['id']);
+        echo 'liste de l util <br>';
+        // var_dump($listeCatUtil);
+        // echo '<br>';
+        // var_dump($value->id_categorie_utilisateur);
+        echo '<li>'.$listeCatUtil[($value->id_categorie_utilisateur)-1]["nom_categorie_utilisateur"].'</li>';
+    
+        /****************** TROUVER NON CAT util  ***************/
+    echo '<li>'.$value->budget.'</li>';
+
     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
     echo '<li><a href="modifyDiagramme?id='.$value->id_diagramme.'">modifier</a></li>';
@@ -98,12 +144,12 @@ foreach($liste as $value){
 // voir les categorie global sous forme de menu
 // debut form
 echo '<form action="" method="post">';
-echo '<p>Budget alloué</p>
+echo '<p>Budget alloué Categorie Global</p>
 <input type="text" name="budget">';
 
 
 ///////////////////////////////////////////////////////// LISTE DEROULANTE CAT GLOBAL /////////////////////
-$categorieGlobal = new CategoriGlobal(null);
+// $categorieGlobal = new CategoriGlobal(null);
 echo '<select name="catGlobal">
 <option value="">--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
@@ -117,12 +163,43 @@ echo '<input type="submit" value="ajouter une depense">
 </form>
 </div>';
 if (isset($_POST['budget'])&& !empty($_POST['budget'])&& isset($_POST['catGlobal'])&& !empty($_POST['catGlobal'])) {
-    $ajouter= new avoir();
+    $avoir= new avoir();
+    $avoir->setIdDiag($_GET['diagramme']);
+    $avoir->setIdCat($_POST['catGlobal']);
+    $avoir->setBudget($_POST['budget']);
+    $avoir->addAvoir($bdd);
+}
+///////////////////////////////// FIN TABLE AVOIR ////////////////////////////////////////
+
+
+///////////////////// AJOUTER UNE PREVISION UTILISATEUR ///////////////////////////////
+// voir les categorie global sous forme de menu
+// debut form
+echo '<form action="" method="post">';
+echo '<p>Budget alloué Categorie Utilisateur</p>
+<input type="text" name="budget">';
+
+
+///////////////////////////////////////////////////////// LISTE DEROULANTE CAT UTIL /////////////////////
+
+echo '<select name="catUtil">
+<option value="">--merci de selecitonner une catégorie utilisateur--</option>';
+$tab = $categorieUtil->showAllCategorieUtil($bdd);
+foreach($tab as $value){
+
+    echo '<option value='.$value->id_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.'</option>';
+}
+echo '</select>';
+// fin duformulaire ////////////////
+echo '<input type="submit" value="ajouter une depense">
+</form>
+</div>';
+if (isset($_POST['budget'])&& !empty($_POST['budget'])&& isset($_POST['catUtil'])&& !empty($_POST['catUtil'])) {
+    $ajouter= new Ajouter();
     $ajouter->setIdDiag($_GET['diagramme']);
-    $ajouter->setIdCat($_POST['catGlobal']);
+    $ajouter->setIdCat($_POST['catUtil']);
     $ajouter->setBudget($_POST['budget']);
-    var_dump($ajouter);
-    $ajouter->addAvoir($bdd);
+    $ajouter->addAjouter($bdd);
 }
 ///////////////////////////////// FIN TABLE AVOIR ////////////////////////////////////////
 
