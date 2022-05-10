@@ -92,6 +92,10 @@ if (isset($_GET['diagramme'])) {
 
  /////////////////////////////////////////// TABLE AVOIR ///////////////////////
         $avoir= new Avoir();
+        
+            /// tentative d'inner join ///////
+        var_dump($avoir->innerJoinDiagramme($bdd,$_GET['diagramme']));
+            /// tentative d'inner join ///////
 
 
         $liste = $avoir->showAllAvoirByDiag($bdd,$_GET['diagramme']);

@@ -175,6 +175,19 @@ public function showAjouterIdCatIdDiag($bdd,$idCat,$idDiag):array{
 }
 
 
+// test inner join avec la table diagramme
+public function innerJoinDiagramme($bdd,$idDiag):array{
+    try {
+        $req=$bdd->prepare();
+        $req->execute(array(
+            'id_diagramme' => $idDiag,
+        ));
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
+
+
 
 }
 
