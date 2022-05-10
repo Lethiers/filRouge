@@ -61,6 +61,20 @@ public function showAllDiagramme($bdd){
     return $data;
 }
 
+// fonction pour afficher tout les diagrammes par id_util
+public function showDiagrammeById($bdd,$idUtil){
+    try {
+        $req =  $bdd->prepare('SELECT * FROM diagramme WHERE id_util=:id_util');
+        $req->execute(array(
+            'id_util' => $idUtil,
+        ));
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    } catch (Exception $e) {
+        die('Erreur :' .$e->getMessage());
+    }
+}
+
 // fonction pour voir un diagramme TEST OK
 public function showDiagramme($bdd,$id){
     $req = $bdd->prepare('SELECT * FROM diagramme WHERE id_diagramme =:id_diagramme');

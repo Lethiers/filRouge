@@ -56,7 +56,7 @@ if (isset($_POST['name_diagramme']) && !empty($_POST['name_diagramme'])) {
 echo $message;
 
 // afficher la liste des diagramme
-$tab = $diag->showAllDiagramme($bdd);
+$tab = $diag->showDiagrammeById($bdd,$_SESSION['id']);
 
 echo '<form action="" method="get">';
 echo '<select name="diagramme">';
@@ -93,9 +93,9 @@ if (isset($_GET['diagramme'])) {
  /////////////////////////////////////////// TABLE AVOIR ///////////////////////
         $avoir= new Avoir();
         
-            /// tentative d'inner join ///////
-        var_dump($avoir->innerJoinDiagramme($bdd,$_GET['diagramme']));
-            /// tentative d'inner join ///////
+        //     /// tentative d'inner join ///////
+        // var_dump($avoir->innerJoinDiagramme($bdd,$_GET['diagramme']));
+        //     /// tentative d'inner join ///////
 
 
         $liste = $avoir->showAllAvoirByDiag($bdd,$_GET['diagramme']);
