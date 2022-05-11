@@ -1,9 +1,17 @@
 <?php
+session_start();
     //Analyse de l'URL avec parse_url() et retourne ses composants
     $url = parse_url($_SERVER['REQUEST_URI']);
     //test soit l'url a une route sinon on renvoi à la racine
     $path = isset($url['path']) ? $url['path'] : '/';
     /*--------------------------ROUTER -----------------------------*/
+    if ($_SESSION['connect'] == "ok") {
+        include './view/view_header_connect.php';
+    }else{
+        include './view/view_header.php';
+    }
+
+
     //test de la valeur $path dans l'URL et import de la ressource
     switch($path){
         //route / acceuil
@@ -30,11 +38,11 @@
 		break ;
         //route / supprimer -- operation
         case $path === "/filRouge/supprimerOperation":
-            include './ctrl/ctrl_suppressionOperation.php';
+            include './ctrl/ctrl_suppression_operation.php';
 		break ;
         //route / modifier -- operation
         case $path === "/filRouge/modifierOperation":
-            include './ctrl/ctrl_modifierOperation.php';
+            include './ctrl/ctrl_modifier_operation.php';
 		break ;
 
         // route / deconnexion

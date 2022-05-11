@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 // importation bdd
 include './utils/connectBdd.php';
 
@@ -7,7 +7,7 @@ include './utils/connectBdd.php';
 include './model/model_utilisateur.php';
 
 // ------- importation des view -----
-include './view/view_header.php';
+// include './view/view_header.php';
 include './view/view_connexion.php';
 
 $utilisateur = new Utilisateur();
@@ -24,6 +24,8 @@ if (isset($_POST['pseudo_util'])&& !empty($_POST['pseudo_util'])&&isset($_POST['
         $connexion = $utilisateur->checkUser($bdd,$_POST['pseudo_util'],$hash);
         if (!empty($connexion)) {
             var_dump($connexion);
+            var_dump($_SESSION['connect']);
+            $_SESSION['connect'] = "ok";
             $_SESSION['id'] = $connexion[0]->id_util;
             $_SESSION['pseudo'] = $connexion[0]->pseudo_util;
             echo 'bienvenue '.$_POST['pseudo_util'].'!';

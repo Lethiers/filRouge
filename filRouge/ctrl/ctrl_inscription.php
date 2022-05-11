@@ -1,15 +1,11 @@
 <?php
 // importation bdd
 include './utils/connectBdd.php';
-
 // importation model
 include './model/model_utilisateur.php';
-
 // ------- importation des view -----
-include './view/view_header.php';
+// include './view/view_header.php';
 include './view/view_inscription.php';
-
-
 // ----------- logic ------------
 
 if (isset($_POST['nom_util'])&& !empty($_POST['nom_util'])&&
@@ -58,5 +54,4 @@ isset($_POST['mdp_util'])&& !empty($_POST['mdp_util'])
 }
 // ------- importation du footer -----
 include './view/view_footer.php';
-
 ?>

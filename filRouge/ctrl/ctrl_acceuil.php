@@ -7,7 +7,7 @@ include './utils/connectBdd.php';
 // include '../model/model_utilisateur.php';
 
 // ------- importation des view -----
-include './view/view_header.php';
+// include './view/view_header.php';
 include './view/view_acceuil.php';
 include './view/view_footer.php';
 

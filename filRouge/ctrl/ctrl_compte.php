@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 // importation bdd
 include './utils/connectBdd.php';
 
@@ -7,7 +7,7 @@ include './utils/connectBdd.php';
 include './model/model_utilisateur.php';
 
 // ------- importation des view -----
-include './view/view_header_connect.php';
+// include './view/view_header_connect.php';
 include './view/view_compte.php';
 
 

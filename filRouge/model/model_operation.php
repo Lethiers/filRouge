@@ -112,6 +112,34 @@ public function showAllOperation($bdd):void{
     }
 }
 
+// fonction pour aficher toute les depenses
+public function showAllOperationByIdUtil($bdd,$id):void{
+    echo '<div>';
+    echo '<ul>';
+    try {
+        
+        $req = $bdd->prepare('SELECT * FROM operation WHERE id_util=:id_util');
+        $req->execute(array(
+            'id_util' => $id,
+        ));
+        while ($data =$req->fetch()) {
+            $nom = $data['nom_operation'];
+            $date = $data['date_operation'];
+            $montant = $data['montant_operation'];
+            $id = $data['id_operation'];
+
+            echo '<li>L\'operation '.$nom.'<a href="modifierOperation?id='.$id.'">modifier</a> <a href="supprimerOperation?id='.$id.'">supprimer</a><li>';
+            echo '<li>effectuer le '.$date.'<li>';
+            echo '<li>pour un montant de '.$montant.'<li>';
+        }
+        echo '</ul>';
+        echo '</div>';
+        
+    } catch (Exception $e) {
+        die ('Erreur :' .$e->getMessage());
+    }
+}
+
 public function showOperation($bdd,$id):void{
     try {
         $req = $bdd->prepare('SELECT * FROM operation WHERE id_operation = :id_operation');

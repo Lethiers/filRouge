@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 // importation bdd
 include './utils/connectBdd.php';
 // importation model
@@ -9,7 +9,7 @@ include './model/model_utilisateur.php';
 include './model/model_cat_global.php';
 
 // ------- importation des view -----
-include './view/view_header.php';
+// include './view/view_header.php';
 
 // --------------------- salutaion à l'administrateur
 echo '<h1>bonjour '.$_SESSION['pseudo'].'</h1>';
