@@ -89,9 +89,15 @@ session_start();
         case $path === "/filRouge/updateCategorieUtilisateur":
             include './ctrl/ctrl_update_cat_util.php';
 
+            //!!!!!!!!!!!!!!!!! mauvais fonctionnement à regarder !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // route / categorie utilisateur
         case $path === "/filRouge/categorieUtilisateur":
             include './ctrl/ctrl_cat_util.php';
+ //!!!!!!!!!!!!!!!!! mauvais fonctionnement à regarder !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        // route / categorie utilisateur
+        case $path === "/filRouge/comparaison":
+            include './ctrl/ctrl_comparaison.php';
 
             ///////////////////////////////////TEST////////////////////////////////////////////
 
