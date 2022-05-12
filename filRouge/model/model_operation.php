@@ -140,6 +140,20 @@ public function showAllOperationByIdUtil($bdd,$id):void{
     }
 }
 
+// retourner operatino selon l'utilisateur en FETCH_OBJ
+public function showAllOperationByUtilId($bdd,$id){
+    try {
+        $req = $bdd->prepare('SELECT * FROM operation WHERE id_util =:id_util');
+        $req->execute(array(
+            'id_util' =>$id,
+        ));
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+    } catch (Exception $e) {
+        die ('Erreur :' .$e->getMessage());
+    }
+}
+
 public function showOperation($bdd,$id):void{
     try {
         $req = $bdd->prepare('SELECT * FROM operation WHERE id_operation = :id_operation');

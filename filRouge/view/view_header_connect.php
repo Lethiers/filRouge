@@ -15,6 +15,7 @@
       <button><a href="/filRouge/operation">operation</a></button>
       <button><a href="/filRouge/diagramme">diagramme</a></button>
       <button><a href="/filRouge/categorieUtilisateur">categorie</a></button>
+      <button><a href="/filRouge/comparaison">comparer</a></button>
       <button><a href=""></a>Mode Nuit</button>
     </form>
 </header>
