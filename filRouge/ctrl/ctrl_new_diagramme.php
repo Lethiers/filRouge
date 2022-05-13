@@ -175,6 +175,7 @@ if (isset($_POST['budget'])&& !empty($_POST['budget'])&& isset($_POST['catGlobal
     $avoir->setBudget($_POST['budget']);
     $avoir->addAvoir($bdd);
 }
+
 ///////////////////////////////// FIN TABLE AVOIR ////////////////////////////////////////
 
 

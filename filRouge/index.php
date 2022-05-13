@@ -63,53 +63,61 @@ session_start();
         // route / modifier -- diagramme
         case $path === "/filRouge/modifyDiagramme":
             include './ctrl/ctrl_modify_diagramme.php';
+        break ;
 
 
         // route / admin
         case $path === "/filRouge/admin":
             include './ctrl/ctrl_admin.php';
+        break ;
 
 
         // route / supprimer un diagramme
         case $path === "/filRouge/deleteDiagrammeGlobal":
             include './ctrl/ctrl_delete_diagramme_global.php';
+        break ;
 
 
         // route / modifier un diagramme
         case $path === "/filRouge/updateDiagrammeGlobal":
             include './ctrl/ctrl_update_diagramme_global.php';
+        break ;
 
 
         // route / supprimer categorie utilisateur
         case $path === "/filRouge/deleteCategorieUtilisateur":
             include './ctrl/ctrl_delete_cat_util.php';
+        break ;
 
 
         // route / modifier categorie utilisateur
         case $path === "/filRouge/updateCategorieUtilisateur":
             include './ctrl/ctrl_update_cat_util.php';
+        break ;
 
             //!!!!!!!!!!!!!!!!! mauvais fonctionnement à regarder !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         // route / categorie utilisateur
         case $path === "/filRouge/categorieUtilisateur":
             include './ctrl/ctrl_cat_util.php';
+        break ;
  //!!!!!!!!!!!!!!!!! mauvais fonctionnement à regarder !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         // route / categorie utilisateur
         case $path === "/filRouge/comparaison":
             include './ctrl/ctrl_comparaison.php';
+        break ;
 
             ///////////////////////////////////TEST////////////////////////////////////////////
 
         // route / modifier/supprimer table avoir
         case $path === "/filRouge/modifierDepenseGlobal":
             include './ctrl/ctrl_modifier_avoir.php';
+        break ;
 
         // route / modifier/supprimer table ajouter 
         case $path === "/filRouge/modifierDepenseUtil":
             include './ctrl/ctrl_modifier_ajouter.php';
+        break ;
 ///////////////////////////////////TEST////////////////////////////////////////////
-
-		break ;
     }
 ?>

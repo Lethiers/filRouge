@@ -26,10 +26,10 @@ $operation = new Operation();
 $tabloOperation = $operation->showAllOperationByUtilId($bdd,$_SESSION['id']);
 // var_dump($tabloOperation);
 foreach($tabloOperation as $value){
-    if ($value->id_balance == 1) {
+    if ($value->id_balance == 2) {
         array_push($tabloOpTotalPos,$value->montant_operation);
     }
-    if ($value->id_balance == 2) {
+    if ($value->id_balance == 1) {
         array_push($tabloOpTotalNeg,$value->montant_operation);
     }
 }
@@ -39,19 +39,25 @@ echo 'vous avez gagné '.$operationPos.'€ et dépensé '.$operationNeg.'€';
 // j'arrive à sortir un tablo pos et negatif
 
 
-// gérer la date des operations PB selectionne tout les utilisateurs
+// gérer la date des operations 
 $tabloCatGlobal = [];
 $tabloCatUtil = [];
 if (isset($_POST['date_operation']) && !empty($_POST['date_operation'])) {
 
     $operationByDate  = $operation->showAllOperationByDate($bdd,$_POST['date_operation'],$_SESSION['id']);
+    // var_dump($operationByDate);
     foreach($operationByDate as $value){
         if ($value->id_categorie_global !== null) {
-            array_push($tabloCatGlobal, [$value->id_categorie_global=>$value->montant_operation]);
-        }elseif ($value->id_categorie_utilisateur !== null) {
-            array_push($tabloCatUtil, [$value->id_categorie_utilisateur =>$value->montant_operation]);
+            if (isset($tabloCatGlobal[$value->id_categorie_global])) {
+                $tabloCatGlobal[$value->id_categorie_global] += $value->montant_operation;
+            }else {
+                $tabloCatGlobal[$value->id_categorie_global] = $value->montant_operation;
+            }
+        // }elseif ($value->id_categorie_utilisateur !== null) {
+        //     ($tabloCatUtil, [$value->id_categorie_utilisateur =>$value->montant_operation]);
         }
-    }     
+    
+    }   
 }
 echo '<br>';
 var_dump($tabloCatGlobal);
@@ -62,7 +68,6 @@ echo '<br>';
 
 // choix du diagramme
 $diagramme = new Diagramme();
-
 $tabloDiag = $diagramme->showDiagrammeById($bdd,$_SESSION['id']);
 // var_dump($tabloDiag);
 echo '<form action="" method="post">';
@@ -75,19 +80,30 @@ echo '</select>';
 echo '<input type="submit" value="comparer">';
 echo '</form>';
 
+// créer un tableau vide pour stocker reponse diagramme
+$tabloDiagrammeGlobal = [];
+
 // model cat global
-$catGlobal = new CategoriGlobal();
 if (isset($_POST['diagramme']) && !empty($_POST['diagramme'])) {
 
-        $tabloCatGlobal = $catGlobal->showCategorieGlobal($bdd,$_POST['diagramme']);
-        var_dump($catGlobal);
-        foreach($tabloCatGlobal as $value){
-            echo $value->nom_categorie_global;
-            echo '<br>';
-            echo $value->id_categorie_global;
-            echo '<br>';
-    }
+        $diagrammeUtilSelect = $diagramme->showDiagramme($bdd,$_POST['diagramme']);
+        // var_dump($diagrammeUtilSelect);
+        $avoir = new Avoir();
+        $tabloAvoir = $avoir->showAllAvoirByDiag($bdd,$_POST['diagramme']);
+        // var_dump($tabloAvoir);
+        foreach($tabloAvoir as $value){
+            if ($value->id_categorie_global !== null) {
+                if (isset($tabloDiagrammeGlobal[$value->id_categorie_global])) {
+                    $tabloDiagrammeGlobal[$value->id_categorie_global] += $value->budget;
+                }else {
+                    $tabloDiagrammeGlobal[$value->id_categorie_global] = $value->budget;
+                }
+            }
+        }
+
+
 }
+var_dump($tabloDiagrammeGlobal);
 
 
 

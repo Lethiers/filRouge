@@ -236,6 +236,31 @@ public function modifyOperation($bdd,$id,$nom,$date,$montant,$idCatGlobal,$idBal
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
 
