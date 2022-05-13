@@ -44,25 +44,18 @@ $tabloCatGlobal = [];
 $tabloCatUtil = [];
 if (isset($_POST['date_operation']) && !empty($_POST['date_operation'])) {
 
-    
-    $operationByDate  =$operation->showAllOperationByDate($bdd,$_POST['date_operation']);
-    // var_dump($operationByDate);
+    $operationByDate  = $operation->showAllOperationByDate($bdd,$_POST['date_operation'],$_SESSION['id']);
     foreach($operationByDate as $value){
         if ($value->id_categorie_global !== null) {
-            array_push($tabloCatGlobal, [$value->montant_operation => $value->id_categorie_global]);
+            array_push($tabloCatGlobal, [$value->id_categorie_global=>$value->montant_operation]);
         }elseif ($value->id_categorie_utilisateur !== null) {
-            array_push($tabloCatUtil, [$value->montant_operation => $value->id_categorie_utilisateur]);
+            array_push($tabloCatUtil, [$value->id_categorie_utilisateur =>$value->montant_operation]);
         }
     }     
 }
 echo '<br>';
 var_dump($tabloCatGlobal);
-
-
-
-
-
-
+echo '<br>';
 
 ///////////////////////////////////// EN PAUSE //////////////////////////////////
 
@@ -82,21 +75,27 @@ echo '</select>';
 echo '<input type="submit" value="comparer">';
 echo '</form>';
 
-
+// model cat global
+$catGlobal = new CategoriGlobal();
 if (isset($_POST['diagramme']) && !empty($_POST['diagramme'])) {
-    var_dump($_POST['diagramme']);
+
+        $tabloCatGlobal = $catGlobal->showCategorieGlobal($bdd,$_POST['diagramme']);
+        var_dump($catGlobal);
+        foreach($tabloCatGlobal as $value){
+            echo $value->nom_categorie_global;
+            echo '<br>';
+            echo $value->id_categorie_global;
+            echo '<br>';
+    }
 }
 
 
-// model cat global
-echo '<br>';
-$catGlobal = new CategoriGlobal();
-$tabloCatGlobal = $catGlobal->showAllCategorieGlobal($bdd);
-// echo $tabloCatGlobal[0]->nom_categorie_global;
-// echo $tabloCatGlobal[0]->id_categorie_global;
-// var_dump($tabloCatGlobal);
 
 ///////////////////////////////////// EN PAUSE //////////////////////////////////
+
+
+
+// var_dump($tabloCatGlobal);
 
 // model cat util
 // echo '<br>';

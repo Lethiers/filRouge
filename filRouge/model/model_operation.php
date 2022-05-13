@@ -87,14 +87,15 @@ public function addOperation($bdd,$id):void{
 
 
 // fonction pour aficher toute les par date
-public function showAllOperationByDate($bdd,$date):array{
+public function showAllOperationByDate($bdd,$date,$idUtil):array{
     echo '<div>';
     echo '<ul>';
     try {
         
-        $req = $bdd->prepare('SELECT * FROM operation WHERE date_operation>=:date_operation');
+        $req = $bdd->prepare('SELECT * FROM operation WHERE date_operation>=:date_operation and id_util=:id_util');
         $req->execute(array(
             'date_operation' => $date,
+            'id_util' => $idUtil,
         ));
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         return $data;
