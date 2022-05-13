@@ -174,14 +174,15 @@ public function showAjouterIdCatIdDiag($bdd,$idCat,$idDiag):array{
     }
 }
 
-
 // test inner join avec la table diagramme
 public function innerJoinDiagramme($bdd,$idDiag):array{
     try {
-        $req=$bdd->prepare();
+        $req=$bdd->prepare('SELECT * FROM diagramme INNER JOIN ajouter WHERE diagramme.id_diagramme=:id_diagramme');
         $req->execute(array(
             'id_diagramme' => $idDiag,
         ));
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
     } catch (Exception $e) {
         die('Erreur :' .$e->getMessage());
     }

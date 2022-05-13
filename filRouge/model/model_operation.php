@@ -86,6 +86,25 @@ public function addOperation($bdd,$id):void{
 }
 
 
+// fonction pour aficher toute les par date
+public function showAllOperationByDate($bdd,$date):array{
+    echo '<div>';
+    echo '<ul>';
+    try {
+        
+        $req = $bdd->prepare('SELECT * FROM operation WHERE date_operation>=:date_operation');
+        $req->execute(array(
+            'date_operation' => $date,
+        ));
+        $data = $req->fetchAll(PDO::FETCH_OBJ);
+        return $data;
+
+    } catch (Exception $e) {
+        die ('Erreur :' .$e->getMessage());
+    }
+}
+
+
 // fonction pour aficher toute les depenses
 public function showAllOperation($bdd):void{
     echo '<div>';
@@ -193,6 +212,8 @@ public function deleteOperation($bdd,$id):void{
         die ('Erreur :' .$e->getMessage());
     }
 }
+
+
 
 public function modifyOperation($bdd,$id,$nom,$date,$montant,$idCatGlobal,$idBalance):void{
     try {

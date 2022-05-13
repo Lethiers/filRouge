@@ -69,9 +69,6 @@ public function showCategorieGlobal($bdd,$id):array{
         ));
         $data = $req->fetchAll(PDO::FETCH_OBJ);
         return $data;
-
-
-
     } catch (Exception $e) {
         die ('Erreur :' .$e->getMessage());
     }
