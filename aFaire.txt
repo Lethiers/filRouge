@@ -1,0 +1,3 @@
+faire inner join de balance sur operation afin d'utiliser
+isPositive
+FINALEMENT SUPPRIMER TABLE BALANCE

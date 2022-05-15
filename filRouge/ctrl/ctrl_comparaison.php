@@ -111,27 +111,6 @@ var_dump($tabloDiagrammeGlobal);
 
 
 
-// var_dump($tabloCatGlobal);
-
-// model cat util
-// echo '<br>';
-// $catUtil = new CategoriUtil();
-// $tabloCatUtil = $catUtil->showCategorieUtilTablo($bdd,$_SESSION['id']);
-// var_dump($tabloCatUtil);
-
-
-// table avoir
-// echo '<br>';
-// $avoir = new Avoir();
-// $tabloAvoir = $avoir->innerJoinDiagramme($bdd,$idDiag);
-// var_dump($tabloAvoir);
-
-
-// table ajouter
-// echo '<br>';
-// $ajouter = new Ajouter();
-// $tabloAjouter = $avoir->innerJoinDiagramme($bdd,$idDiag);
-// var_dump($tabloAjouter);
 
 
 
