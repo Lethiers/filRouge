@@ -1,25 +1,22 @@
 <?php
-// session_start();
-// importation bdd
+// importation bdd //
 include './utils/connectBdd.php';
 // importation model
-// model utilisateur
+// --------- model utilisateur
 include './model/model_utilisateur.php';
-// model categorie global
+// --------- model categorie global
 include './model/model_cat_global.php';
 
-// ------- importation des view -----
-// include './view/view_header.php';
-
-// --------------------- salutaion à l'administrateur
+// message de bienvenue à l'administrateur :
 echo '<h1>bonjour '.$_SESSION['pseudo'].'</h1>';
 
+// ------- importation des view -----
 include './view/view_admin.php';
 
-$message = "";
 // --- LOGICAL
-
-$cat = new CategoriGlobal();
+$message = "";
+// initialisation du model
+$cat = new CategorieGlobal();
 if (isset($_POST['nom_categorie_global'])&& !empty($_POST['nom_categorie_global'])) {
     $cat->setNom($_POST['nom_categorie_global']);
     $cat->addCategorieUtil($bdd);
@@ -46,6 +43,7 @@ foreach($tab as $value){
     
 }
 echo '</ul>';
+
 // on utilise le retour du ctrl delete pour afficher un message de suppression
 $msg = "";
 if (isset($_GET['supp'])) {

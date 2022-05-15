@@ -8,7 +8,6 @@ include './model/model_cat_global.php';
 // ------- importation des view -----
 include './view/view_modifierOperation.php';
 
-
 // initialisation objet operation
 $operation = new Operation(null,null,null);
 
@@ -22,7 +21,7 @@ echo '<option value='.$tabBalnce[0]['id_balance'].'>negatif</option>';
 echo '</select>';
 
 // voir les categorie global sous forme de checkbox
-$categorieGlobal = new CategoriGlobal(null);
+$categorieGlobal = new CategorieGlobal(null);
 echo '<select name="catGlobal">
 <option value="">--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);

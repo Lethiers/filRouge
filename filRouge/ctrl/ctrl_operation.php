@@ -29,7 +29,7 @@ echo '</select>';
 
 
 // voir les categorie global sous forme de checkbox
-$categorieGlobal = new CategoriGlobal(null);
+$categorieGlobal = new CategorieGlobal(null);
 echo '<select name="catGlobal">
 <option value="">--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);

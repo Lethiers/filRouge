@@ -1,5 +1,4 @@
 <?php
-// session_start();
 // importation bdd
 include './utils/connectBdd.php';
 

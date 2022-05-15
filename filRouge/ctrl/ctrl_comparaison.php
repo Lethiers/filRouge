@@ -16,9 +16,6 @@ include './view/view_comparaison.php';
 // reussir a afficher les operations selon un selecteur
 // choix operation
 
-
-
-
 $tabloOpTotalPos = [];
 $tabloOpTotalNeg = [];
 
@@ -69,7 +66,6 @@ echo '<br>';
 // choix du diagramme
 $diagramme = new Diagramme();
 $tabloDiag = $diagramme->showDiagrammeById($bdd,$_SESSION['id']);
-// var_dump($tabloDiag);
 echo '<form action="" method="post">';
 echo '<select name="diagramme">
 <option value="">--selectionner votre diagramme--</option>';
@@ -87,10 +83,8 @@ $tabloDiagrammeGlobal = [];
 if (isset($_POST['diagramme']) && !empty($_POST['diagramme'])) {
 
         $diagrammeUtilSelect = $diagramme->showDiagramme($bdd,$_POST['diagramme']);
-        // var_dump($diagrammeUtilSelect);
         $avoir = new Avoir();
         $tabloAvoir = $avoir->showAllAvoirByDiag($bdd,$_POST['diagramme']);
-        // var_dump($tabloAvoir);
         foreach($tabloAvoir as $value){
             if ($value->id_categorie_global !== null) {
                 if (isset($tabloDiagrammeGlobal[$value->id_categorie_global])) {

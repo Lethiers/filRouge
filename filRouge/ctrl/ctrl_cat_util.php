@@ -1,6 +1,4 @@
 <?php
-// session_start();
-// var_dump($_SESSION['id']);
 // importation bdd
 include './utils/connectBdd.php';
 
@@ -12,12 +10,12 @@ include './model/model_cat_global.php';
 include './view/view_cat_util.php';
 
 
-$categoriUtil = new CategoriUtil();
+$categorieUtil = new CategorieUtil();
 
 $message = "";
 
 // voir les categorie global sous forme de checkbox
-$categorieGlobal = new CategoriGlobal();
+$categorieGlobal = new CategorieGlobal();
 echo '<select name="catGlobal">
 <option value="">--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
@@ -34,14 +32,13 @@ echo '</div>';
 
 
 if (isset($_POST['nom_categorie_utilisateur']) && !empty($_POST['nom_categorie_utilisateur']) && isset($_POST['catGlobal']) && !empty($_POST['catGlobal']) ) {
-    echo 'ok';
-    $categoriUtil->setNom($_POST['nom_categorie_utilisateur']);
-    $categoriUtil->setIdUtil($_SESSION['id']);
-    $categoriUtil->setCatGlobal($_POST['catGlobal']);
-    $categoriUtil->addCategorieUtil($bdd);
+    $categorieUtil->setNom($_POST['nom_categorie_utilisateur']);
+    $categorieUtil->setIdUtil($_SESSION['id']);
+    $categorieUtil->setCatGlobal($_POST['catGlobal']);
+    $categorieUtil->addCategorieUtil($bdd);
 
 
-    $message = 'la categorie '.$categoriUtil->getNom().' viens d\'etre créer';
+    $message = 'la categorie '.$categorieUtil->getNom().' viens d\'etre créer';
 }else {
     $message = "merci de remplir les champs";
 }
@@ -49,21 +46,16 @@ if (isset($_POST['nom_categorie_utilisateur']) && !empty($_POST['nom_categorie_u
 echo $message;
 
 
-
-$listCatUtil = $categoriUtil->showCategorieUtil($bdd,$_SESSION['id']);
+// montrer la liste des categorie utilisateur créer
+$listCatUtil = $categorieUtil->showCategorieUtil($bdd,$_SESSION['id']);
 
 echo '<ul>';
 foreach($listCatUtil as $value){
-
-
     echo '<li>
     <label for='.$value->nom_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.'</label></br>
     <a href="updateCategorieUtilisateur?id='.$value->id_categorie_utilisateur.'">modifier</a>
     <a href="deleteCategorieUtilisateur?id='.$value->id_categorie_utilisateur.'">supprimer</a>
-    </li>';
-
-
-    
+    </li>'; 
 }
 echo '</ul>';
 

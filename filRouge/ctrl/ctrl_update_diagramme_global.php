@@ -15,7 +15,7 @@ include './view/view_update_diagramme_global.php';
 
 // on verifie qu'on a bien un id
 if (isset($_GET['id']) and !empty($_GET['id'])) {
-    $cat = new CategoriGlobal();
+    $cat = new CategorieGlobal();
     $tab = $cat->showCategorieGlobal($bdd,$_GET['id']);
     foreach($tab as $val){
         echo '<form action="" method="post">

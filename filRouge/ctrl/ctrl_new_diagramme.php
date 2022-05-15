@@ -84,9 +84,9 @@ if (isset($_GET['diagramme'])) {
 
 
             // instancier obget cat global
-        $categorieGlobal = new CategoriGlobal(null);
+        $categorieGlobal = new CategorieGlobal(null);
             // instancier obget cat util
-        $categorieUtil = new CategoriUtil(null);
+        $categorieUtil = new CategorieUtil(null);
 
         //////////////////////////// CEST OK AU DESSUS ////////////////////////////
 
@@ -155,7 +155,7 @@ echo '<p>Budget alloué Categorie Global</p>
 
 
 ///////////////////////////////////////////////////////// LISTE DEROULANTE CAT GLOBAL /////////////////////
-// $categorieGlobal = new CategoriGlobal(null);
+// $categorieGlobal = new CategorieGlobal(null);
 echo '<select name="catGlobal">
 <option value="">--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);

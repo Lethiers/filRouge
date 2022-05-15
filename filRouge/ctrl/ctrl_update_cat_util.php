@@ -11,7 +11,7 @@ include './model/model_cat_global.php';
 include './view/view_update_cat_util.php';
 
 // voir les categorie global sous forme de checkbox
-$categorieGlobal = new CategoriGlobal();
+$categorieGlobal = new CategorieGlobal();
 
 echo '<select name="catGlobal">
 <option value="">--merci de selecitonner une catégorie global--</option>';
@@ -23,7 +23,7 @@ foreach($tab as $value){
 echo '</select>';
 
 // recupêration de la cat util par l'id
-$catUtil = new CategoriUtil();
+$catUtil = new CategorieUtil();
 
 if (isset($_GET['id'])) {
     $tab = $catUtil->showCategorieUtilById($bdd,$_GET['id']);

@@ -1,20 +1,13 @@
 <?php
-// session_start();
 // importation bdd
 include './utils/connectBdd.php';
-
 // importation model
 include './model/model_utilisateur.php';
-
 // ------- importation des view -----
-// include './view/view_header_connect.php';
 include './view/view_compte.php';
-
 
 $utilisateur = new Utilisateur();
 $util = $utilisateur->showUser($bdd,$_SESSION['id']);
-
-
 
 echo '<input type="text" name="nom_util" value='.$util[0]->nom_util.'><br>';
 echo '<input type="text" name="prenom_util" value='.$util[0]->prenom_util.'><br>';
