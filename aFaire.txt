@@ -9,15 +9,7 @@ FINALEMENT SUPPRIMER TABLE BALANCE
 
 probleme suppression des catégories global
 
-model ajouter ok
-model avoir ok
-model balance
-model cat global
-model cat util
-model depense
-model diagramme
-model oepration
-model utilisateur
+
 
 
 
