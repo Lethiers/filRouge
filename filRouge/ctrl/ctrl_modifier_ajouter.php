@@ -3,8 +3,8 @@
 include './utils/connectBdd.php';
 
 // importation model
-//-----------------model diagramme
-include './model/model_diagramme.php';
+//-----------------model prevision
+include './model/model_prevision.php';
 
 //-----------------model ajouter
 include './model/model_ajouter.php';
@@ -13,9 +13,9 @@ include './model/model_ajouter.php';
 $ajouter = new Ajouter();
 
 
-if (isset($_GET['idDiag']) && !empty($_GET['idDiag']) && isset($_GET['idCat']) && !empty($_GET['idCat'])) {
+if (isset($_GET['idprevision']) && !empty($_GET['idprevision']) && isset($_GET['idCat']) && !empty($_GET['idCat'])) {
 
-    $tablo = $ajouter->showAjouterIdCatIdDiag($bdd,$_GET['idCat'],$_GET['idDiag']);
+    $tablo = $ajouter->showAjouterIdCatIdprevision($bdd,$_GET['idCat'],$_GET['idprevision']);
     var_dump($tablo);
 
     foreach($tablo as $value){
@@ -27,17 +27,17 @@ if (isset($_GET['idDiag']) && !empty($_GET['idDiag']) && isset($_GET['idCat']) &
     echo '</form>';
 
 
-    $ajouter->setIdDiag($_GET['idDiag']);
+    $ajouter->setIdprevision($_GET['idprevision']);
     $ajouter->setIdCat($_GET['idCat']);
     $ajouter->setBudget($_POST['budget']);
     $ajouter->modifyAjouter($bdd);
-    header('Location: diagramme');
+    header('Location: prevision');
 
 
 
 }else {
-    $ajouter->deleteAjouterIdCatIdDiag($bdd,$_GET['idCat'],$_GET['suppDiag']);
-    header('Location: diagramme');
+    $ajouter->deleteAjouterIdCatIdprevision($bdd,$_GET['idCat'],$_GET['suppprevision']);
+    header('Location: prevision');
 }
 
 

@@ -55,24 +55,24 @@ session_start();
             include './ctrl/ctrl_contact.php';
 		break ;
 
-        // route / diagramme
-        case $path === "/filRouge/diagramme":
-            include './ctrl/ctrl_new_diagramme.php';
+        // route / prevision
+        case $path === "/filRouge/prevision":
+            include './ctrl/ctrl_new_prevision.php';
 		break ;
 
-        // route / modifier -- diagramme
-        case $path === "/filRouge/modifyDiagramme":
-            include './ctrl/ctrl_modify_diagramme.php';
+        // route / modifier -- prevision
+        case $path === "/filRouge/modifyprevision":
+            include './ctrl/ctrl_modifier_prevision.php';
         break ;
 
-        // route / supprimer un diagramme
-        case $path === "/filRouge/deleteDiagrammeGlobal":
+        // route / supprimer un prevision
+        case $path === "/filRouge/deleteprevisionGlobal":
             include './ctrl/ctrl_delete_diagramme_global.php';
         break ;
 
 
-        // route / modifier un diagramme
-        case $path === "/filRouge/updateDiagrammeGlobal":
+        // route / modifier un prevision
+        case $path === "/filRouge/updateprevisionGlobal":
             include './ctrl/ctrl_update_diagramme_global.php';
         break ;
 

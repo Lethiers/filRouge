@@ -14,6 +14,8 @@ $categorieUtil = new CategorieUtil();
 
 $message = "";
 
+
+
 // voir les categorie global sous forme de checkbox
 $categorieGlobal = new CategorieGlobal();
 echo '<select name="catGlobal">
@@ -26,7 +28,7 @@ foreach($tab as $value){
 echo '</select>';
 
 
-echo '<input type="submit" value="modifier">';
+echo '<input type="submit" value="créer">';
 echo '</form>';
 echo '</div>';
 

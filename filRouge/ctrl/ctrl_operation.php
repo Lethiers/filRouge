@@ -1,12 +1,13 @@
 <?php
 // session_start();
-// var_dump($_SESSION['id']);
+var_dump($_SESSION['id']);
 // importation bdd
 include './utils/connectBdd.php';
 
 // importation model
 include './model/model_operation.php';
 include './model/model_cat_global.php';
+include './model/model_cat_util.php';
 include './model/model_balance.php';
 
 
@@ -16,13 +17,15 @@ include './view/view_operation.php';
 
 $operation = new Operation(null,null,null);
 
-// selectionner si l'operation est positive ou negative grace à l'id balance
-$balance = new Balance(null);
-$tabBalnce = $balance->showAllIsPositive($bdd);
-echo '<select name="positive">
-<option value="">--type de dépense--</option>';
-echo '<option value='.$tabBalnce[1]['id_balance'].'>positive</option>';
-echo '<option value='.$tabBalnce[0]['id_balance'].'>negatif</option>';
+// voir les categorie utilisateur sous forme de checkbox
+$categorieUtil = new CategorieUtil(null,null,null);
+echo '<select name="catUtil">
+<option value="">--merci de selecitonner une catégorie utilisateur--</option>';
+$tabUtil = $categorieUtil->showCategorieUtil($bdd,$_SESSION['id']);
+foreach($tabUtil as $value){
+
+    echo '<option value='.$value->id_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.'</option>';
+}
 echo '</select>';
 
 
@@ -40,24 +43,37 @@ foreach($tab as $value){
 echo '</select>';
 
 echo '<input type="submit" value="Enregistrer">';
-////////////////////////// FAIRE CATEGORIE UTILISATEUR //////////////////////////
+
+////////////////////////// ENREGISTRER LES OPERATIONS //////////////////////////
 
 
 if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation']) 
 && isset($_POST['date_operation']) && !empty($_POST['date_operation']) 
-&& isset($_POST['montant_operation']) && !empty($_POST['montant_operation'])
-&& isset($_POST['catGlobal']) && !empty($_POST['catGlobal']) 
-&& isset($_POST['positive']) && !empty($_POST['positive'])) {
+&& isset($_POST['montant_operation']) && !empty($_POST['montant_operation'])) {
 
-    var_dump($_POST['positive']);
 
-    $operation->setDate($_POST['date_operation']);
-    $operation->setMontant($_POST['montant_operation']);
-    $operation->setNom($_POST['nom_operation']);
-    $operation->setidCatGlobal($_POST['catGlobal']);
-    $operation->setidBalance($_POST['positive']);
+    if (isset($_POST['catUtil']) && !empty($_POST['catUtil'])) {
+        $categorieGlobalByUtil = $categorieUtil->showCategorieUtilById($bdd,$_POST['catUtil']);
+        $operation->setidCatGlobal($categorieGlobalByUtil[0]->id_categorie_global);
+        $operation->setidCatUtil($_POST['catUtil']);
 
-    $operation->addOperation($bdd,$_SESSION['id']);
+        $operation->setDate($_POST['date_operation']);
+        $operation->setMontant($_POST['montant_operation']);
+        $operation->setNom($_POST['nom_operation']);
+
+        $operation->addOperation($bdd,$_SESSION['id']);
+
+    }else {
+        $operation->setidCatUtil(null);
+        $operation->setidCatGlobal($_POST['catGlobal']);
+
+        $operation->setDate($_POST['date_operation']);
+        $operation->setMontant($_POST['montant_operation']);
+        $operation->setNom($_POST['nom_operation']);
+      
+        $operation->addOperation($bdd,$_SESSION['id']);
+    }
+
 
     echo '<p>l\'opération '.$operation->getNom().' pour un montant de '.$operation->getMontant().' est bien enregistré<p>';
 
@@ -68,7 +84,36 @@ if (isset($_POST['nom_operation']) && !empty($_POST['nom_operation'])
 echo '</form>';
 echo '</div>';
 
-$operation->showAllOperationByIdUtil($bdd,$_SESSION['id']);
+/////////////////// voir les operations /////////////////////////////////////////
+
+$operationTableau = $operation->showAllOperationByIdUtil($bdd,$_SESSION['id']);
+
+// var_dump($operationTableau);
+// var_dump($tab);
+// $total = array_merge($operationTableau, $tab,$tabUtil);
+// var_dump($total);
+
+// foreach($tab as $value){
+//     echo '<h2>'.$value->nom_categorie_global.'<h2>';
+   
+// }
+
+
+echo '
+<div>
+<ul>';
+foreach($operationTableau as $value){
+    echo '<li>'.$value->nom_operation.'<li>';
+    echo '<li>'.$value->date_operation.'<li>';
+    echo '<li>'.$value->montant_operation.'<li>';
+    echo '<li><a href="modifierOperation?id='.$value->id_operation.'">modifier</a><li>';
+    echo '<li><a href="supprimerOperation?id='.$value->id_operation.'">supprimer</a><li>';
+   
+}
+echo '
+</ul>
+</div>';
+
 
 
 

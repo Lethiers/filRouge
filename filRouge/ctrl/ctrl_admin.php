@@ -36,8 +36,8 @@ foreach($tab as $value){
 
     echo '<li>
     <label for='.$value->nom_categorie_global.'>'.$value->nom_categorie_global.'</label></br>
-    <a href="updateDiagrammeGlobal?id='.$value->id_categorie_global.'">modifier</a>
-    <a href="deleteDiagrammeGlobal?id='.$value->id_categorie_global.'">supprimer</a>
+    <a href="updateprevisionGlobal?id='.$value->id_categorie_global.'">modifier</a>
+    <a href="deleteprevisionGlobal?id='.$value->id_categorie_global.'">supprimer</a>
     </li>';
 
     

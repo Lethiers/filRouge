@@ -23,14 +23,7 @@ montant_operation float,
 nom_operation varchar(50),
 id_categorie_global int not null,
 id_categorie_utilisateur int null,
-id_util int not null,
-id_balance int not null
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-create table balance (
-id_balance int auto_increment primary key not null,
-isPositive tinyint(1) default null
+id_util int not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 create table categorie_utilisateur(
@@ -45,9 +38,10 @@ id_categorie_global int auto_increment primary key not null,
 nom_categorie_global varchar(50)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table diagramme(
-id_diagramme int auto_increment primary key not null,
-nom_diagramme varchar(50),
+create table prevision(
+id_prevision int auto_increment primary key not null,
+nom_prevision varchar(50),
+budget_prevision float,
 id_util int not null,
 id_frequence int not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -57,44 +51,22 @@ id_frequence int auto_increment primary key not null,
 liste_frequence varchar(50)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-create table ajouter(
-id_diagramme int not null,
-id_categorie_utilisateur int not null,
-budget float null,
-primary key (id_diagramme,id_categorie_utilisateur)
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
 create table avoir(
-id_diagramme int not null,
+id_prevision int not null,
 id_categorie_global int not null,
 budget float null,
-primary key (id_diagramme,id_categorie_global)
+primary key (id_prevision,id_categorie_global)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 ---------------------------------------- ajout des contraintes ---------------------
 
-
--------------------------- contrainte pour la table d'association //////////ajouter
--- id_diagramme
-alter table ajouter
-add constraint fk_ajouter_diagramme
-foreign key (id_diagramme)
-references diagramme(id_diagramme);
--- id_categorie_utilisateur
-alter table ajouter
-add constraint fk_ajouter_categorie_utilisateur
-foreign key (id_categorie_utilisateur)
-references categorie_utilisateur(id_categorie_utilisateur);
-
-
 -------------------------- contrainte pour la table d'association //////////avoir
--- id_diagramme
+-- id_prevision
 alter table avoir
-add constraint fk_avoir_diagramme
-foreign key (id_diagramme)
-references diagramme(id_diagramme);
+add constraint fk_avoir_prevision
+foreign key (id_prevision)
+references prevision(id_prevision);
 -- id_categorie_utilisateur
 alter table avoir
 add constraint fk_avoir_categorie_utilisateur
@@ -115,15 +87,15 @@ add constraint fk_creer_utilisateur
 foreign key (id_util)
 references utilisateur(id_util);
 
----------------------------------------- contrainte pour la table /////////// diagramme
+---------------------------------------- contrainte pour la table /////////// prevision
 -- id  frequence
-alter table diagramme
+alter table prevision
 add constraint fk_repeter_frequence
 foreign key (id_frequence)
 references frequence(id_frequence);
 
 -- id  utilisateur
-alter table diagramme
+alter table prevision
 add constraint fk_concevoir_utilisateur
 foreign key (id_util)
 references utilisateur(id_util);
@@ -150,12 +122,6 @@ add constraint fk_associer_categorie_utilisateur
 foreign key(id_categorie_utilisateur)
 references categorie_utilisateur(id_categorie_utilisateur);
 
--- id_balance 
-alter table operation 
-add constraint fk_etre_balance
-foreign key(id_balance)
-references balance (id_balance);
-
 -- id_util
 alter table operation 
 add constraint fk_depenser_utilisateur
@@ -167,10 +133,6 @@ insert into droit (nom_droit) values
 ("Utilisateur"),
 ("Admin");
 
-insert into balance (isPositive) values 
-(0),
-(1);
-
 insert into frequence (liste_frequence) values 
 ("jour"),
 ("mois"),
@@ -179,6 +141,17 @@ insert into frequence (liste_frequence) values
 ("quadrimestriel"),
 ("semestriel "),
 ("annuel");
+
+insert into categorie_global (nom_categorie_global) values 
+("Loisir"),
+("banque"),
+("salaire"),
+("travail"),
+("loyer"),
+("transport"),
+("restaurant"),
+("frais fixe"),
+("energie");
 
 
 

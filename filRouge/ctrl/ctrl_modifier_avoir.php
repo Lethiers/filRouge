@@ -3,8 +3,8 @@
 include './utils/connectBdd.php';
 
 // importation model
-//-----------------model diagramme
-include './model/model_diagramme.php';
+//-----------------model prevision
+include './model/model_prevision.php';
 
 
 //-----------------model avoir
@@ -14,8 +14,8 @@ include './model/model_avoir.php';
 $avoir = new Avoir();
 
 
-if (isset($_GET['idDiag']) && !empty($_GET['idDiag']) && isset($_GET['idCat']) && !empty($_GET['idCat'])) {
-    $tablo = $avoir->showAvoirIdCatIdDiag($bdd,$_GET['idCat'],$_GET['idDiag']);
+if (isset($_GET['idprevision']) && !empty($_GET['idprevision']) && isset($_GET['idCat']) && !empty($_GET['idCat'])) {
+    $tablo = $avoir->showAvoirIdCatIdprevision($bdd,$_GET['idCat'],$_GET['idprevision']);
     var_dump($tablo);
 
     foreach($tablo as $value){
@@ -27,17 +27,17 @@ if (isset($_GET['idDiag']) && !empty($_GET['idDiag']) && isset($_GET['idCat']) &
     echo '</form>';
 
 
-    $avoir->setIdDiag($_GET['idDiag']);
+    $avoir->setIdprevision($_GET['idprevision']);
     $avoir->setIdCat($_GET['idCat']);
     $avoir->setBudget($_POST['budget']);
     $avoir->modifyAvoir($bdd);
-    header('Location: diagramme');
+    header('Location: prevision');
 
 
 
 }else {
-    $avoir->deleteAvoirIdCatIdDiag($bdd,$_GET['idCat'],$_GET['suppDiag']);
-    header('Location: diagramme');
+    $avoir->deleteAvoirIdCatIdprevision($bdd,$_GET['idCat'],$_GET['suppprevision']);
+    header('Location: prevision');
 }
 
 

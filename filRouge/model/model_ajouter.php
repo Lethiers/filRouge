@@ -2,13 +2,13 @@
 
 class Ajouter{
     // attribut
-    private $idDiag;
+    private $idprevision;
     private $idCat;
     private $budget;
 
     // constructor
-    public function __constructor($idDiag,$idCat,$budget){
-        $this->idDiag = $budget;
+    public function __constructor($idprevision,$idCat,$budget){
+        $this->idprevision = $budget;
         $this->idCat = $idCat;
         $this->budget = $budget;
     }
@@ -17,11 +17,11 @@ class Ajouter{
                     SETTER ET GETTEUR
         -------------------------------*/
 
-    public function getIdDiag():int{
-        return $this->idDiag;
+    public function getIdprevision():int{
+        return $this->idprevision;
     }
-    public function setIdDiag($idDiag):void{
-        $this->idDiag = $idDiag;
+    public function setIdprevision($idprevision):void{
+        $this->idprevision = $idprevision;
     }
 
 
@@ -43,13 +43,13 @@ class Ajouter{
 
     // METHODES
 
-    // methode pour ajouter un budget entre diagramme et categorie total
+    // methode pour ajouter un budget entre prevision et categorie total
     public function addAjouter($bdd):void{
         try {
-            $req=$bdd->prepare('INSERT INTO ajouter (id_diagramme,id_categorie_utilisateur,budget)
-            VALUES(:id_diagramme,:id_categorie_utilisateur,:budget)');
+            $req=$bdd->prepare('INSERT INTO ajouter (id_prevision,id_categorie_utilisateur,budget)
+            VALUES(:id_prevision,:id_categorie_utilisateur,:budget)');
             $req->execute(array(
-                'id_diagramme' => $this->getIdDiag(),
+                'id_prevision' => $this->getIdprevision(),
                 'id_categorie_utilisateur' => $this->getIdCat(),
                 'budget' => $this->getBudget()
             ));
@@ -69,12 +69,12 @@ class Ajouter{
             die('Erreur :' .$e->getMessage());
         }
     }
-    // methode pour afficher tout les budget par id diag
-    public function showAllAjouterByDiag($bdd,$id):array{
+    // methode pour afficher tout les budget par id prevision
+    public function showAllAjouterByprevision($bdd,$id):array{
         try {
-            $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_diagramme=:id_diagramme');
+            $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_prevision=:id_prevision');
             $req->execute(array(
-                'id_diagramme'=> $id
+                'id_prevision'=> $id
             ));
 
             $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -100,7 +100,7 @@ class Ajouter{
     }
 
     // methode de supression par id cat util
-    public function deleteIdCat($bdd,$id_diagramme):void{
+    public function deleteIdCat($bdd,$id_prevision):void{
         try {
             
             $req = $bdd->prepare('DELETE FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur');
@@ -114,13 +114,13 @@ class Ajouter{
     }
 
 
-    // methode de supression par id diagramme
-    public function deleteDiagramme($bdd,$id_diagramme):void{
+    // methode de supression par id prevision
+    public function deleteprevision($bdd,$id_prevision):void{
         try {
             
-            $req = $bdd->prepare('DELETE FROM ajouter WHERE id_diagramme=:id_diagramme');
+            $req = $bdd->prepare('DELETE FROM ajouter WHERE id_prevision=:id_prevision');
             $req->execute(array(
-                'id_diagramme' =>$id
+                'id_prevision' =>$id
             ));
 
         } catch (Exception $e) {
@@ -132,11 +132,11 @@ class Ajouter{
     // methode pour modifier
     public function modifyAjouter($bdd):void{
         try {
-            $req = $bdd->prepare('UPDATE ajouter SET budget=:budget WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_diagramme=:id_diagramme');
+            $req = $bdd->prepare('UPDATE ajouter SET budget=:budget WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_prevision=:id_prevision');
             $req->execute(array(
                 'id_categorie_utilisateur' => $this->getIdCat(),
                 'budget' => $this->getBudget(),
-                'id_diagramme' => $this->getIdDiag(),
+                'id_prevision' => $this->getIdprevision(),
 
             ));
         } catch (Exception $e) {
@@ -144,13 +144,13 @@ class Ajouter{
         }
     }
 
-    // methode pour supprimer par id cat et id diagramme
-    public function deleteAjouterIdCatIdDiag($bdd,$idCat,$idDiag):void{
+    // methode pour supprimer par id cat et id prevision
+    public function deleteAjouterIdCatIdprevision($bdd,$idCat,$idprevision):void{
         try {
-            $req=$bdd->prepare('DELETE FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_diagramme=:id_diagramme');
+            $req=$bdd->prepare('DELETE FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_prevision=:id_prevision');
             $req->execute(array(
                 'id_categorie_utilisateur'=> $idCat,
-                'id_diagramme'=> $idDiag
+                'id_prevision'=> $idprevision
             ));
 
         } catch (Exception $e) {
@@ -158,13 +158,13 @@ class Ajouter{
         }
     }
 
-    // methode pour afficher un budget par id cat et id diagramme
-    public function showAjouterIdCatIdDiag($bdd,$idCat,$idDiag):array{
+    // methode pour afficher un budget par id cat et id prevision
+    public function showAjouterIdCatIdprevision($bdd,$idCat,$idprevision):array{
         try {
-            $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_diagramme=:id_diagramme ');
+            $req=$bdd->prepare('SELECT * FROM ajouter WHERE id_categorie_utilisateur=:id_categorie_utilisateur AND id_prevision=:id_prevision ');
             $req->execute(array(
                 'id_categorie_utilisateur'=> $idCat,
-                'id_diagramme'=> $idDiag
+                'id_prevision'=> $idprevision
             ));
 
             $data = $req->fetchAll(PDO::FETCH_OBJ);
@@ -174,12 +174,12 @@ class Ajouter{
         }
     }
 
-    // test inner join avec la table diagramme
-    public function innerJoinDiagramme($bdd,$idDiag):array{
+    // test inner join avec la table prevision
+    public function innerJoinprevision($bdd,$idprevision):array{
         try {
-            $req=$bdd->prepare('SELECT * FROM diagramme INNER JOIN ajouter WHERE diagramme.id_diagramme=:id_diagramme');
+            $req=$bdd->prepare('SELECT * FROM prevision INNER JOIN ajouter WHERE prevision.id_prevision=:id_prevision');
             $req->execute(array(
-                'id_diagramme' => $idDiag,
+                'id_prevision' => $idprevision,
             ));
             $data = $req->fetchAll(PDO::FETCH_OBJ);
             return $data;

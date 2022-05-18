@@ -4,7 +4,7 @@ include './utils/connectBdd.php';
 // importation des models
 include './model/model_ajouter.php';
 include './model/model_avoir.php';
-include './model/model_diagramme.php';
+include './model/model_prevision.php';
 include './model/model_operation.php';
 include './model/model_cat_global.php';
 include './model/model_cat_util.php';
@@ -23,10 +23,10 @@ $operation = new Operation();
 $tabloOperation = $operation->showAllOperationByUtilId($bdd,$_SESSION['id']);
 // var_dump($tabloOperation);
 foreach($tabloOperation as $value){
-    if ($value->id_balance == 2) {
+    if ($value->montant_operation > 0) {
         array_push($tabloOpTotalPos,$value->montant_operation);
     }
-    if ($value->id_balance == 1) {
+    if ($value->montant_operation < 0) {
         array_push($tabloOpTotalNeg,$value->montant_operation);
     }
 }
@@ -63,41 +63,41 @@ echo '<br>';
 ///////////////////////////////////// EN PAUSE //////////////////////////////////
 
 
-// choix du diagramme
-$diagramme = new Diagramme();
-$tabloDiag = $diagramme->showDiagrammeById($bdd,$_SESSION['id']);
+// choix du prevision
+$prevision = new prevision();
+$tabloprevision = $prevision->showprevisionById($bdd,$_SESSION['id']);
 echo '<form action="" method="post">';
-echo '<select name="diagramme">
-<option value="">--selectionner votre diagramme--</option>';
-foreach($tabloDiag as $value){
-    echo '<option value='.$value->id_diagramme.'>'.$value->nom_diagramme.'</option>';
+echo '<select name="prevision">
+<option value="">--selectionner votre prevision--</option>';
+foreach($tabloprevision as $value){
+    echo '<option value='.$value->id_prevision.'>'.$value->nom_prevision.'</option>';
 }
 echo '</select>';
 echo '<input type="submit" value="comparer">';
 echo '</form>';
 
-// créer un tableau vide pour stocker reponse diagramme
-$tabloDiagrammeGlobal = [];
+// créer un tableau vide pour stocker reponse prevision
+$tabloprevisionGlobal = [];
 
 // model cat global
-if (isset($_POST['diagramme']) && !empty($_POST['diagramme'])) {
+if (isset($_POST['prevision']) && !empty($_POST['prevision'])) {
 
-        $diagrammeUtilSelect = $diagramme->showDiagramme($bdd,$_POST['diagramme']);
+        $previsionUtilSelect = $prevision->showprevision($bdd,$_POST['prevision']);
         $avoir = new Avoir();
-        $tabloAvoir = $avoir->showAllAvoirByDiag($bdd,$_POST['diagramme']);
+        $tabloAvoir = $avoir->showAllAvoirByprevision($bdd,$_POST['prevision']);
         foreach($tabloAvoir as $value){
             if ($value->id_categorie_global !== null) {
-                if (isset($tabloDiagrammeGlobal[$value->id_categorie_global])) {
-                    $tabloDiagrammeGlobal[$value->id_categorie_global] += $value->budget;
+                if (isset($tabloprevisionGlobal[$value->id_categorie_global])) {
+                    $tabloprevisionGlobal[$value->id_categorie_global] += $value->budget;
                 }else {
-                    $tabloDiagrammeGlobal[$value->id_categorie_global] = $value->budget;
+                    $tabloprevisionGlobal[$value->id_categorie_global] = $value->budget;
                 }
             }
         }
 
 
 }
-var_dump($tabloDiagrammeGlobal);
+var_dump($tabloprevisionGlobal);
 
 
 
