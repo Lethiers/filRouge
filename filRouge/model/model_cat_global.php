@@ -58,6 +58,20 @@ class CategorieGlobal{
             die ('Erreur :' .$e->getMessage());
         }
     }
+    // fonction pour retourner le nom de la categorie par id
+    public function returnNameCatGlobal($bdd,$id):array{
+        try {
+            $req = $bdd->prepare('SELECT nom_categorie_global FROM categorie_global WHERE id_categorie_global=:id_categorie_global');
+            $req->execute(array(
+                'id_categorie_global' => $id
+            ));
+            $req->execute();
+            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+        } catch (Exception $e) {
+            die('Erreur :' .$e->getMessage());
+        }
+    }
 
     // fonction pour voir une catégorie global
     public function showCategorieGlobal($bdd,$id):array{

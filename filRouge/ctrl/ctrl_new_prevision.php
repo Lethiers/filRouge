@@ -28,6 +28,20 @@ $message ="";
 
 // initialise objet prevision
 $prevision= new prevision();
+// instancier obget cat global
+$categorieGlobal = new CategorieGlobal(null);
+
+// //////////////////////////////PARFAIT POUR MODIFIER LA PREVISION ///////////////////////
+// $catGlobalTableau = $categorieGlobal->showAllCategorieGlobal($bdd);
+// echo '<ul>';
+// foreach($catGlobalTableau as $value){
+
+//     echo '<li><label for="">'.$value->nom_categorie_global.'</label>
+//     <input type="text" name="'.$value->id_categorie_global.'" id="'.$value->nom_categorie_global.'"><li>';
+// }
+// echo '</ul>';
+//////////////////////////////PARFAIT POUR MODIFIER LA PREVISION ///////////////////////
+
 // formulaire pour créer un nouveau prevision
 if (isset($_POST['name_prevision']) && !empty($_POST['name_prevision']) &&
 isset($_POST['budget_prevision']) && !empty($_POST['budget_prevision'])) {
@@ -74,10 +88,9 @@ if (isset($_GET['prevision'])) {
 
 
 
-            // instancier obget cat global
-        $categorieGlobal = new CategorieGlobal(null);
+
             // instancier obget cat util
-        $categorieUtil = new CategorieUtil(null);
+        // $categorieUtil = new CategorieUtil(null);
 
         //////////////////////////// CEST OK AU DESSUS ////////////////////////////
 

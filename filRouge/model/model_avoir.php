@@ -70,7 +70,7 @@ class Avoir{
         }
     }
     // methode pour afficher tout les budget par id prevision
-    public function showAllAvoirByprevision($bdd,$id):array{
+    public function showAllAvoirByPrevision($bdd,$id):array{
         try {
             $req=$bdd->prepare('SELECT * FROM avoir WHERE id_prevision=:id_prevision');
             $req->execute(array(
