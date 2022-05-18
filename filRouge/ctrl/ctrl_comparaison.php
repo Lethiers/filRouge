@@ -20,7 +20,7 @@ $tabloOpTotalPos = [];
 $tabloOpTotalNeg = [];
 
 $operation = new Operation();
-$tabloOperation = $operation->showAllOperationByUtilId($bdd,$_SESSION['id']);
+$tabloOperation = $operation->showAllOperationByIdUtil($bdd,$_SESSION['id']);
 // var_dump($tabloOperation);
 foreach($tabloOperation as $value){
     if ($value->montant_operation > 0) {

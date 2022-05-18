@@ -66,7 +66,7 @@ class CategorieGlobal{
                 'id_categorie_global' => $id
             ));
             $req->execute();
-            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            $data = $req->fetchAll(PDO::FETCH_ASSOC);
             return $data;
         } catch (Exception $e) {
             die('Erreur :' .$e->getMessage());
