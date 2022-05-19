@@ -5,7 +5,7 @@ session_start();
     //test soit l'url a une route sinon on renvoi à la racine
     $path = isset($url['path']) ? $url['path'] : '/';
     /*--------------------------ROUTER -----------------------------*/
-    if ($_SESSION['connect'] == "ok") {
+    if (!empty($_SESSION['connect']) && $_SESSION['connect'] == "ok") {
         include './view/view_header_connect.php';
     }else{
         include './view/view_header.php';

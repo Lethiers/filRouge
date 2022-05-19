@@ -6,24 +6,31 @@
     height: auto;
 }
 
-
-
-/* mode nuit changement de couleur */
-modeNuit{
-    background-color: black;
-    color:white;
+body{
+    color: red;
 }
 
 
-header{
+
+
+/* nav{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: row;
+}
+
+header{
     background-color: rgb(15, 228, 192);
     box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
     color: aliceblue;
     border: solid 1px lightgray;
     border-radius: 5px 5px;
+}
+li{
+    list-style: none;
+}
+#menu{
+    display: flex;
+    flex-direction: row;
 }
 
 footer{
@@ -40,7 +47,7 @@ footer{
 }
 
 /* ------------ article --------------*/
-article{
+/* article{
     background-color: rgb(20, 180, 243);
     width: 250px;
     height: auto;
@@ -49,17 +56,6 @@ article{
     border-radius: 5px 5px;
     box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
 }
-
-
-/* ---------------- bouton----------------- */
-
-/* input:hover{
-    
-    animation: animationBouton alternate infinite 2s;
-} */
-
-/*grid du contenu*/
-
 
 div#container{
     display: grid;
@@ -82,20 +78,6 @@ div#container{
 #articleDeux{
     grid-column: 3;
     grid-row:3 ;    
-}
+}  */
 
-
-
-/* Animation keyframes */
-
-/* @keyframes animationBouton {
-    0%{
-        transform: rotate(10deg);
-    }
-
-    100%{
-        transform: rotate(-10deg);
-    }
-    
-} */
 

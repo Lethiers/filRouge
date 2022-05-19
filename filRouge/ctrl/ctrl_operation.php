@@ -1,6 +1,4 @@
 <?php
-// session_start();
-var_dump($_SESSION['id']);
 // importation bdd
 include './utils/connectBdd.php';
 
@@ -19,8 +17,8 @@ $operation = new Operation(null,null,null);
 
 // voir les categorie utilisateur sous forme de checkbox
 $categorieUtil = new CategorieUtil(null,null,null);
-echo '<select name="catUtil">
-<option value="">--merci de selecitonner une catégorie utilisateur--</option>';
+echo '<select name="catUtil" class="bouton">
+<option value="">catégorie utilisateur</option>';
 $tabUtil = $categorieUtil->showCategorieUtil($bdd,$_SESSION['id']);
 foreach($tabUtil as $value){
 
@@ -33,8 +31,8 @@ echo '</select>';
 
 // voir les categorie global sous forme de checkbox
 $categorieGlobal = new CategorieGlobal(null);
-echo '<select name="catGlobal">
-<option value="">--merci de selecitonner une catégorie global--</option>';
+echo '<select name="catGlobal" class="bouton">
+<option value="">catégorie global</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
 foreach($tab as $value){
 
@@ -42,7 +40,7 @@ foreach($tab as $value){
 }
 echo '</select>';
 
-echo '<input type="submit" value="Enregistrer">';
+echo '<input type="submit" value="Enregistrer" class="bouton">';
 
 ////////////////////////// ENREGISTRER LES OPERATIONS //////////////////////////
 
@@ -88,27 +86,17 @@ echo '</div>';
 
 $operationTableau = $operation->showAllOperationByIdUtil($bdd,$_SESSION['id']);
 
-// var_dump($operationTableau);
-// var_dump($tab);
-// $total = array_merge($operationTableau, $tab,$tabUtil);
-// var_dump($total);
-
-// foreach($tab as $value){
-//     echo '<h2>'.$value->nom_categorie_global.'<h2>';
-   
-// }
-
-
 echo '
 <div>
-<ul>';
+<ul id="liste">';
 foreach($operationTableau as $value){
+    echo '<div class="operation">';
     echo '<li>'.$value->nom_operation.'<li>';
     echo '<li>'.$value->date_operation.'<li>';
     echo '<li>'.$value->montant_operation.'<li>';
     echo '<li><a href="modifierOperation?id='.$value->id_operation.'">modifier</a><li>';
     echo '<li><a href="supprimerOperation?id='.$value->id_operation.'">supprimer</a><li>';
-   
+    echo '</div>';
 }
 echo '
 </ul>

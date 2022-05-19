@@ -51,6 +51,5 @@ isset($_POST['mdp_util'])&& !empty($_POST['mdp_util'])
 }else {
     echo 'merci de remplir les champs';
 }
-// ------- importation du footer -----
-include './view/view_footer.php';
+
 ?>

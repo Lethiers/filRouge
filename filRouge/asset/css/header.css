@@ -1,0 +1,64 @@
+/* Logo site web */
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+header{
+    background-image: radial-gradient(circle at -7.29% 34.65%, #0099d8 0, #0098e4 3.85%, #0096ef 7.69%, #0093f7 11.54%, #0090fd 15.38%, #008cff 19.23%, #0087ff 23.08%, #0082ff 26.92%, #007bfe 30.77%, #5474f8 34.62%, #7a6cf0 38.46%, #9663e5 42.31%, #ad5ad9 46.15%, #bf50cc 50%, #ce46bd 53.85%, #da3cae 57.69%, #e3339d 61.54%, #ea2c8c 65.38%, #ee297c 69.23%, #ef2b6b 73.08%, #ef305b 76.92%, #ec384a 80.77%, #e7423a 84.62%, #e14b2a 88.46%, #d95518 92.31%, #cf5d00 96.15%, #c46600 100%);
+    box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    color: aliceblue;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px;
+    width: 200vh;
+}
+
+
+button {
+    color: black;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+  }
+
+a{
+    color: #9663e5;
+    text-decoration: none;
+}
+a:hover{
+    color: #ef2b6b;
+    text-decoration: none;
+}
+
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#logo{
+    width: 10em;
+    height: auto;
+    align-self: flex-start;
+}
+
+#menu{
+    align-self: flex-end;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+}
+li{
+    list-style: none;
+    width: auto;
+    height: auto;
+    margin: 1vh;
+}

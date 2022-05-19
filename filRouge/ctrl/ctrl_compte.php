@@ -13,7 +13,7 @@ echo '<input type="text" name="nom_util" value='.$util[0]->nom_util.'><br>';
 echo '<input type="text" name="prenom_util" value='.$util[0]->prenom_util.'><br>';
 echo '<input type="text" name="pseudo_util" value='.$util[0]->pseudo_util.'><br>';
 echo '<input type="text" name="email_util" value='.$util[0]->email_util.'><br>';
-echo '<input type="submit" value="modifier">';
+echo '<input type="submit" value="modifier" id="bouton">';
 
 // formulaire pour modifier l'utilisateur
 if (isset($_POST['nom_util']) && !empty($_POST['nom_util']) &&
