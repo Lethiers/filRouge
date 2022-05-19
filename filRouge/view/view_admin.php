@@ -7,7 +7,6 @@
             <input type="text" name="nom_categorie_global" placeholder="nom categorie">
             <input type="submit" value="créer">
         </form>
-        
     </div>
 
     

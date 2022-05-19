@@ -99,6 +99,8 @@ if (isset($_POST['prevision']) && !empty($_POST['prevision'])) {
 }
 
 var_dump($tabloprevisionGlobal);
+// echo '<script>', 'diagramme(["loisir","plaisir","restaurant","banque"],[140,500,800,300]);', '</script>';
+echo '<script>', 'diagramme(["loisir:Dépense","Loisir:Prevision"],[80,500]);', '</script>';
 
 
 

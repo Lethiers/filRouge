@@ -1,83 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-/* Logo site web */
+p,h2,input, li{
+    font-family: 'Roboto', sans-serif;
+}
 
-#logo{
+
+img{
+    margin-top: 20px;
     width: 10em;
     height: auto;
 }
 
-body{
-    color: red;
+
+#container{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
 }
 
-
-
-
-/* nav{
-    display: flex;
-    flex-direction: row;
-}
-
-header{
-    background-color: rgb(15, 228, 192);
+#presentation{
+    text-align: center;
+    margin: 5vh;
+    padding: 5vh;
+    width: 25vh;
     box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
-    color: aliceblue;
     border: solid 1px lightgray;
     border-radius: 5px 5px;
-}
-li{
-    list-style: none;
-}
-#menu{
-    display: flex;
-    flex-direction: row;
-}
-
-footer{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgb(26, 160, 194);
-    box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
-    margin: 15px;
-    padding: 15px;
-    color: aliceblue;
-    border: solid 1px lightgray;
-    border-radius: 5px 5px;
-}
-
-/* ------------ article --------------*/
-/* article{
-    background-color: rgb(20, 180, 243);
-    width: 250px;
     height: auto;
-    padding: 2px;
-    margin: 50px;
-    border-radius: 5px 5px;
+    color: black;   
+    padding-bottom: 5vh;
+}
+
+
+#pourquoi{
+    text-align: center;
+    margin: 5vh;
+    padding: 5vh;
+    width: 25vh;
     box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    border: solid 1px lightgray;
+    border-radius: 5px 5px;
+    height: auto;
+    color: black;   
+    padding-bottom: 5vh;
 }
-
-div#container{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-}
-
-#articleUn{
-    grid-column: 1;
-    grid-row: 1;
-
-}
-
-#slider{
-    grid-column: 2;
-    grid-row: 2;
-
-}
-
-#articleDeux{
-    grid-column: 3;
-    grid-row:3 ;    
-}  */
-
 
