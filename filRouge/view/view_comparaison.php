@@ -1,19 +1,25 @@
 
     <title>comparaison</title>
+    <link rel="stylesheet" href="./asset/css/comparer.css">
 </head>
 <body>
-    <form action="" method="post">
-        <h3>Choisir une date</h3>
-        <input type="date" name="date_operation">
-        <input type="submit" value="choisir">
-    </form>
+    <div class ="container">
 
-    <div>
-  <canvas id="myChart"></canvas>
-</div>
     
+    <form action="" method="post">
+        <img src="./asset/image/gateau.png" alt="">
+        <h3>Choisir une date:</h3>
+        <p>pour comparer vos dépenses avec vos diagramme</p>
+        <input type="date" name="date_operation">
 
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <div class="chart_container">
+        <canvas id="graph" aria-label="chart" role="img"></canvas>
+        </div>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="./asset/javaScript/diagramme.js"></script>
 </body>
 </html>

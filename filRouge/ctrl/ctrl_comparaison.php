@@ -12,6 +12,20 @@ include './model/model_cat_util.php';
 include './view/view_comparaison.php';
 // -- logical
 
+// choix du prevision
+$prevision = new prevision();
+$tabloprevision = $prevision->showprevisionById($bdd,$_SESSION['id']);
+
+echo '<select name="prevision" class="bouton">
+<option value="">choisir une prévision</option>';
+foreach($tabloprevision as $value){
+    echo '<option value='.$value->id_prevision.'>'.$value->nom_prevision.'</option>';
+}
+echo '</select>';
+echo '<input type="submit" value="comparer" class="bouton">';
+echo '</form>';
+echo '</div>';
+
 ///////////////////////////////////// EN COURS  //////////////////////////////////
 // reussir a afficher les operations selon un selecteur
 // choix operation
@@ -32,7 +46,7 @@ foreach($tabloOperation as $value){
 }
 $operationPos = array_sum($tabloOpTotalPos);
 $operationNeg = array_sum($tabloOpTotalNeg);
-echo 'vous avez gagné '.$operationPos.'€ et dépensé '.$operationNeg.'€';
+// echo 'vous avez gagné '.$operationPos.'€ et dépensé '.$operationNeg.'€';
 // j'arrive à sortir un tablo pos et negatif
 
 
@@ -62,20 +76,6 @@ echo '<br>';
 
 ///////////////////////////////////// EN PAUSE //////////////////////////////////
 
-
-// choix du prevision
-$prevision = new prevision();
-$tabloprevision = $prevision->showprevisionById($bdd,$_SESSION['id']);
-echo '<form action="" method="post">';
-echo '<select name="prevision">
-<option value="">--selectionner votre prevision--</option>';
-foreach($tabloprevision as $value){
-    echo '<option value='.$value->id_prevision.'>'.$value->nom_prevision.'</option>';
-}
-echo '</select>';
-echo '<input type="submit" value="comparer">';
-echo '</form>';
-
 // créer un tableau vide pour stocker reponse prevision
 $tabloprevisionGlobal = [];
 
@@ -97,6 +97,8 @@ if (isset($_POST['prevision']) && !empty($_POST['prevision'])) {
 
 
 }
+
+var_dump($tabloprevisionGlobal);
 
 
 
