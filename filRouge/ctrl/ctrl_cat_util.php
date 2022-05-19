@@ -18,19 +18,19 @@ $message = "";
 
 // voir les categorie global sous forme de checkbox
 $categorieGlobal = new CategorieGlobal();
-echo '<select name="catGlobal">
-<option value="">--merci de selecitonner une catégorie global--</option>';
+echo '<select name="catGlobal" class="bouton">
+<option value="" >--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
 foreach($tab as $value){
 
     echo '<option value='.$value->id_categorie_global.'>'.$value->nom_categorie_global.'</option>';
 }
 echo '</select>';
-
-
-echo '<input type="submit" value="créer">';
+echo '<input type="submit" value="créer" class="bouton">';
 echo '</form>';
 echo '</div>';
+
+// fin du formulaire de création ---------------
 
 
 if (isset($_POST['nom_categorie_utilisateur']) && !empty($_POST['nom_categorie_utilisateur']) && isset($_POST['catGlobal']) && !empty($_POST['catGlobal']) ) {
@@ -53,11 +53,14 @@ $listCatUtil = $categorieUtil->showCategorieUtil($bdd,$_SESSION['id']);
 
 echo '<ul>';
 foreach($listCatUtil as $value){
+    echo '<div class="operation">';
+    echo '<img src="./asset/image/licorneBaguette.png" alt="">';
     echo '<li>
-    <label for='.$value->nom_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.'</label></br>
+    <label for='.$value->nom_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.' :</label></br>
     <a href="updateCategorieUtilisateur?id='.$value->id_categorie_utilisateur.'">modifier</a>
     <a href="deleteCategorieUtilisateur?id='.$value->id_categorie_utilisateur.'">supprimer</a>
     </li>'; 
+    echo'</div>';
 }
 echo '</ul>';
 

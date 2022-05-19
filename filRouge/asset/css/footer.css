@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+p,h1,h2,input,li{
+    font-family: 'Roboto', sans-serif;
+}
+
+footer{
+    background: rgb(253,160,45);
+    background: linear-gradient(340deg, rgba(253,160,45,1) 0%, rgba(70,253,45,1) 100%); 
+    box-shadow: 0px 0px 10px 4px rgba(119, 119, 119, 0.75);
+    color: aliceblue;
+    border: solid 1px lightgray;
+    border-radius: 5px 5px;
+    width: 200vh;
+}
+

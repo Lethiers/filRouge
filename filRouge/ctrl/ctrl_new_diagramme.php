@@ -107,7 +107,6 @@ if (isset($_GET['diagramme'])) {
             $nomCatGlobal = $categorieGlobal->showCategorieGlobalTablo($bdd);
 
             echo '<li>'.$nomCatGlobal[($value->id_categorie_global)-1]["nom_categorie_global"].'</li>';
-var_dump($nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"]);
             /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  ***************/
 
             echo '<li>'.$value->budget.'</li>';

@@ -85,7 +85,6 @@ isset($_POST['montant_operation'])&& !empty($_POST['montant_operation'])) {
         $operation->setNom($_POST['nom_operation']);
 
         $operation->modifyOperation($bdd,$_GET['id']);
-        var_dump($operation);
 
     }else {
         $operation->setidCatUtil(null);
@@ -97,7 +96,7 @@ isset($_POST['montant_operation'])&& !empty($_POST['montant_operation'])) {
 
         $operation->modifyOperation($bdd,$_GET['id']);
 
-        var_dump($operation);
+
     }
 
     echo 'l\'article '.$operation->getNom().' à été modifié !';

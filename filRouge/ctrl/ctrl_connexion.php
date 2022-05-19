@@ -17,8 +17,6 @@ if (isset($_POST['pseudo_util'])&& !empty($_POST['pseudo_util'])
     if (password_verify($mdp,$hash)){
         $connexion = $utilisateur->checkUser($bdd,$_POST['pseudo_util'],$hash);
         if (!empty($connexion)) {
-            var_dump($connexion);
-            var_dump($_SESSION['connect']);
             $_SESSION['connect'] = "ok";
             $_SESSION['id'] = $connexion[0]->id_util;
             $_SESSION['pseudo'] = $connexion[0]->pseudo_util;

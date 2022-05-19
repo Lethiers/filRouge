@@ -97,7 +97,6 @@ if (isset($_POST['prevision']) && !empty($_POST['prevision'])) {
 
 
 }
-var_dump($tabloprevisionGlobal);
 
 
 

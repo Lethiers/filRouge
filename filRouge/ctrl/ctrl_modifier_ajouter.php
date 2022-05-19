@@ -16,7 +16,6 @@ $ajouter = new Ajouter();
 if (isset($_GET['idprevision']) && !empty($_GET['idprevision']) && isset($_GET['idCat']) && !empty($_GET['idCat'])) {
 
     $tablo = $ajouter->showAjouterIdCatIdprevision($bdd,$_GET['idCat'],$_GET['idprevision']);
-    var_dump($tablo);
 
     foreach($tablo as $value){
         echo '<form action="" method="post">

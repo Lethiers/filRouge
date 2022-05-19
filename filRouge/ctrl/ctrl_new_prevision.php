@@ -1,5 +1,4 @@
 <?php
-// session_start();
 // importation bdd
 include './utils/connectBdd.php';
 
@@ -31,17 +30,6 @@ $prevision= new prevision();
 // instancier obget cat global
 $categorieGlobal = new CategorieGlobal(null);
 
-// //////////////////////////////PARFAIT POUR MODIFIER LA PREVISION ///////////////////////
-// $catGlobalTableau = $categorieGlobal->showAllCategorieGlobal($bdd);
-// echo '<ul>';
-// foreach($catGlobalTableau as $value){
-
-//     echo '<li><label for="">'.$value->nom_categorie_global.'</label>
-//     <input type="text" name="'.$value->id_categorie_global.'" id="'.$value->nom_categorie_global.'"><li>';
-// }
-// echo '</ul>';
-//////////////////////////////PARFAIT POUR MODIFIER LA PREVISION ///////////////////////
-
 // formulaire pour créer un nouveau prevision
 if (isset($_POST['name_prevision']) && !empty($_POST['name_prevision']) &&
 isset($_POST['budget_prevision']) && !empty($_POST['budget_prevision'])) {
@@ -60,108 +48,38 @@ isset($_POST['budget_prevision']) && !empty($_POST['budget_prevision'])) {
 }
 echo $message;
 
+ 
 // afficher la liste des prevision
 $tab = $prevision->showPrevisionById($bdd,$_SESSION['id']);
-
+echo '<div class="containeurMid">';
 echo '<form action="" method="get">';
-echo '<select name="prevision">';
+echo '<h2>Voir votre prevision :</h2>';
+echo '<img src="./asset/image/licornePoison.png" alt="">';
+echo '<select name="prevision" class="bouton">';
 foreach($tab as $value){
     echo '<option value ='.$value->id_prevision.' name='.$value->id_prevision.'>  '.$value->nom_prevision.'</a> </option>';
 }
-echo '<input type="submit" value="voir">';
 echo '</select>';
+echo '<input type="submit" value="voir" class="bouton">';
 echo '</form>';
-
-
-
+echo '</div>';
+///////////////////////////// OK AU DESSUS créer une prevision puis la voir //////////////
 if (isset($_GET['prevision'])) {
 
-    $tab = $prevision->showPrevision($bdd,$_GET['prevision']);
-
-
-    // création liste prevision
-    echo '<ul>';
-    foreach($tab as $value){
-        echo '<li>'.$value->nom_prevision.'</li>';
-        echo '<li><a href="modifyprevision?id='.$value->id_prevision.'">modifier</a></li>';
-        echo '<li><a href="modifyprevision?supp='.$value->id_prevision.'">supprmier</a></li>';
-
-
-
-
-            // instancier obget cat util
-        // $categorieUtil = new CategorieUtil(null);
-
-        //////////////////////////// CEST OK AU DESSUS ////////////////////////////
-
- /////////////////////////////////////////// TABLE AVOIR ///////////////////////
-        $avoir= new Avoir();
-        
-        //     /// tentative d'inner join ///////
-        // var_dump($avoir->innerJoinprevision($bdd,$_GET['prevision']));
-        //     /// tentative d'inner join ///////
-
-
-        $liste = $avoir->showAllAvoirByprevision($bdd,$_GET['prevision']);
-
-
-        foreach($liste as $value){
-
-            /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  *****************/
-            $nomCatGlobal = $categorieGlobal->showCategorieGlobalTablo($bdd);
-
-            echo '<li>'.$nomCatGlobal[($value->id_categorie_global)-1]["nom_categorie_global"].'</li>';
-var_dump($nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"]);
-            /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  ***************/
-
-            echo '<li>'.$value->budget.'</li>';
-
-            ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-            ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-            echo '<li><a href="modifierDepenseGlobal?idprevision='.$value->id_prevision.'&idCat='.$nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"].'">modifier</a></li>';
-            echo '<li><a href="modifierDepenseGlobal?suppprevision='.$value->id_prevision.'&idCat='.$nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"].'">supprmier</a></li>';
-        }
-
-
-        /////////////////////////////////////////// TABLE AJOUTER ///////////////////////
-
-
-        /********************************modifier le nom */
-// $ajouter= new Ajouter();
-
-// $liste = $ajouter->showAllAjouterByprevision($bdd,$_GET['prevision']);
-// // var_dump($liste);
-// foreach($liste as $value){
-
-//         /****************** TROUVER NON CAT util   *****************/
-//         $listeCatUtil = $categorieUtil->showCategorieUtilTablo($bdd,$_SESSION['id']);
-//         echo 'liste de l util <br>';
-
-//         echo '<li>'.$listeCatUtil[($value->id_categorie_utilisateur)-1]["nom_categorie_utilisateur"].'</li>';
-
-//         /****************** TROUVER NON CAT util  ***************/
-//     echo '<li>'.$value->budget.'</li>';
-
-//     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-//     ///////////////////////////// MODIFIER LES CHEMIN ///////////////////////
-//     echo '<li><a href="modifierDepenseUtil?idprevision='.$value->id_prevision.'&idCat='.$listeCatUtil[($value->id_categorie_utilisateur)-1]["id_categorie_utilisateur"].'">modifier</a></li>';
-//     echo '<li><a href="modifierDepenseUtil?suppprevision='.$value->id_prevision.'&idCat='.$listeCatUtil[($value->id_categorie_utilisateur)-1]["id_categorie_utilisateur"].'">supprimer</a></li>';
-// }
-
-
-
-///////////////////// AJOUTER UNE PREVISION GLOBAL ///////////////////////////////
+    ///////////////////// AJOUTER UNE PREVISION GLOBAL ///////////////////////////////
 // voir les categorie global sous forme de menu
 // debut form
+echo '<div class="containeurBottom">';
 echo '<form action="" method="post">';
+echo '<img src="./asset/image/licorneVomi.png" alt="">';
 echo '<p>Budget alloué Categorie Global</p>
-<input type="text" name="budget">';
 
+<input type="text" name="budget">';
 
 ///////////////////////////////////////////////////////// LISTE DEROULANTE CAT GLOBAL /////////////////////
 // $categorieGlobal = new CategorieGlobal(null);
-echo '<select name="catGlobal">
-<option value="">--merci de selecitonner une catégorie global--</option>';
+echo '<select name="catGlobal" class="bouton">
+<option value="">catégorie global</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
 foreach($tab as $value){
 
@@ -169,9 +87,50 @@ foreach($tab as $value){
 }
 echo '</select>';
 // fin duformulaire ////////////////
-echo '<input type="submit" value="ajouter une depense">
-</form>
-</div>';
+echo '<input type="submit" value="ajouter une depense" class="bouton">
+</form>';
+echo '</div>';
+///////////////////////////////--------FIN FORMULAIRE AJOUT PREVISION ---------------------////////////////////////////////////////////////////////
+
+
+
+
+    $tab = $prevision->showPrevision($bdd,$_GET['prevision']);
+    // création liste prevision
+    
+    
+        
+    foreach($tab as $value){
+        echo '<div class="operation">';
+        echo '<img src="./asset/image/licorneCoucou.png" alt="">';
+        echo '<p>Vous regardez actuellement le diagramme: <br><span>'.$value->nom_prevision.'<span></p>';
+        echo '<p><a href="modifyprevision?id='.$value->id_prevision.'">modifier</a></p>';
+        echo '<p><a href="modifyprevision?supp='.$value->id_prevision.'">supprmier</a></p>';
+        echo '</div>';
+
+        //////////////////////////// CEST OK AU DESSUS ////////////////////////////
+
+ /////////////////////////////////////////// TABLE AVOIR ///////////////////////
+
+        echo '<ul class="budget">';
+        $avoir= new Avoir();
+
+        $liste = $avoir->showAllAvoirByprevision($bdd,$_GET['prevision']);
+
+
+        foreach($liste as $value){
+            echo '<div class="operation">';
+            /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  *****************/
+            $nomCatGlobal = $categorieGlobal->showCategorieGlobalTablo($bdd);
+            echo '<li>'.$nomCatGlobal[($value->id_categorie_global)-1]["nom_categorie_global"].'</li>';
+            /****************** TROUVER NON CAT GLOBAL CAT GLOBAL  ***************/
+            echo '<li>'.$value->budget.'</li>';
+            echo '<li><a href="modifierDepenseGlobal?idprevision='.$value->id_prevision.'&idCat='.$nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"].'">modifier</a></li>';
+            echo '<li><a href="modifierDepenseGlobal?suppprevision='.$value->id_prevision.'&idCat='.$nomCatGlobal[($value->id_categorie_global)-1]["id_categorie_global"].'">supprmier</a></li>';
+            echo '</div>';
+        }
+
+// test logique pour ajouter une catégorie
 if (isset($_POST['budget'])&& !empty($_POST['budget'])&& isset($_POST['catGlobal'])&& !empty($_POST['catGlobal'])) {
     $avoir= new avoir();
     $avoir->setIdprevision($_GET['prevision']);
@@ -180,40 +139,11 @@ if (isset($_POST['budget'])&& !empty($_POST['budget'])&& isset($_POST['catGlobal
     $avoir->addAvoir($bdd);
 }
 
-///////////////////////////////// FIN TABLE AVOIR ////////////////////////////////////////
-
-
-///////////////////// AJOUTER UNE PREVISION UTILISATEUR ///////////////////////////////
-// voir les categorie global sous forme de menu
-// debut form
-// echo '<form action="" method="post">';
-// echo '<p>Budget alloué Categorie Utilisateur</p>
-// <input type="text" name="budget">';
-
-
-///////////////////////////////////////////////////////// LISTE DEROULANTE CAT UTIL /////////////////////
-
-// echo '<select name="catUtil">
-// <option value="">--merci de selecitonner une catégorie utilisateur--</option>';
-// $tab = $categorieUtil->showAllCategorieUtil($bdd);
-// foreach($tab as $value){
-
-//     echo '<option value='.$value->id_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.'</option>';
-// }
-// echo '</select>';
-// fin duformulaire ////////////////
-// echo '<input type="submit" value="ajouter une depense">
 echo '
 </div>';
 
-///////////////////////////////// FIN TABLE AVOIR ////////////////////////////////////////
-
-
     }
     echo '</ul>';
-
-
-    /*VA FALOIR IMPORTER LA PAGE MODIFICATION ICI*/
 
 }
 
