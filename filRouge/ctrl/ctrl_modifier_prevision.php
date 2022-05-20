@@ -25,12 +25,13 @@ $categorieGlobal = new CategorieGlobal(null);
 $prevision = new prevision();
 $avoir = new Avoir(null,null,null);
 
+echo '<form action="" method="post">';
+echo '<img src="./asset/image/licorneSeriously.png" alt="">';
+echo '<p>Modifier votre prevision :</p>';
 // voir un seul prevision avec création du formulaire pour le modifier
 if (isset($_GET['id'])) {
-    
     $tab = $prevision->showprevision($bdd,$_GET['id']);
     foreach ($tab as $value) {
-        echo '<form action="" method="post">';
             echo '<input type="text" name="name_prevision" placeholder='.$value->nom_prevision.'>';
     }
 }
@@ -46,7 +47,7 @@ foreach($avoirTableau as $value){
     echo '<label for="">'.$a[0]['nom_categorie_global'].'</label>
     <input type="text" name="'.$value->id_categorie_global.'" id="'.$value->id_categorie_global.'" placeholder='.$value->budget.'>';
 }
-echo '<input type="submit" value="modifier">';
+echo '<input type="submit" value="modifier" class="bouton">';
 echo '</form>';
 
 /////////////////////////////////////////////////////////////////////

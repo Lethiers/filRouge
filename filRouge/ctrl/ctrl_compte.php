@@ -61,7 +61,7 @@ if ($total<0) {
     echo '<img src="./asset/image/licorneContent.png" alt="">';
     echo '<p>Super vous êtes actuellement en positif !<p>';    
 }
-echo '<p>vous avez actuellement gagné '.$operationPos.'€ et dépensé '.$operationNeg.'€<p>';
+echo '<p>vous avez actuellement gagné <span id="positif">'.$operationPos.'€</span> et dépensé <span id="negatif">'.$operationNeg.'€</span><p>';
 // j'arrive à sortir un tablo pos et negatif
 echo '</div>';
 

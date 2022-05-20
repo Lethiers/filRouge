@@ -12,7 +12,6 @@ include './view/view_modifier_operation.php';
 // initialisation objet operation
 $operation = new Operation(null,null,null,null,null);
 
-
 // // selectionner si l'operation est positive ou negative grace à l'id balance
 // $balance = new Balance(null);
 // $tabBalnce = $balance->showAllIsPositive($bdd);
@@ -21,13 +20,13 @@ $operation = new Operation(null,null,null,null,null);
 // echo '<option value='.$tabBalnce[1]['id_balance'].'>positive</option>';
 // echo '<option value='.$tabBalnce[0]['id_balance'].'>negatif</option>';
 // echo '</select>';
-
 if (isset($_GET['id'])) {
     $tablo = $operation->showOperation($bdd,$_GET['id']);
 
     foreach($tablo as $value){
         echo '
         <form action="" method="post">
+        <img src="./asset/image/licorneFix.png" alt="">
         <p>Nom de l\'operation :</p>
         <input type="text" name="nom_operation" placeholder="'.$value->nom_operation.'">
         <p>date de l\'operation :</p>
@@ -40,7 +39,7 @@ if (isset($_GET['id'])) {
 
 // voir les categorie global sous forme de checkbox
 $categorieGlobal = new CategorieGlobal(null);
-echo '<select name="catGlobal">
+echo '<select name="catGlobal" class="bouton">
 <option value="">--merci de selecitonner une catégorie global--</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
 foreach($tab as $value){
@@ -52,7 +51,7 @@ echo '</select>';
 
 // voir les categorie utilisateur sous forme de checkbox
 $categorieUtil = new CategorieUtil(null,null,null);
-echo '<select name="catUtil">
+echo '<select name="catUtil" class="bouton">
 <option value="">--merci de selecitonner une catégorie utilisateur--</option>';
 $tabUtil = $categorieUtil->showCategorieUtil($bdd,$_SESSION['id']);
 foreach($tabUtil as $value){
@@ -60,9 +59,9 @@ foreach($tabUtil as $value){
     echo '<option value='.$value->id_categorie_utilisateur.'>'.$value->nom_categorie_utilisateur.'</option>';
 }
 echo '</select>
-<input type="submit" value="modifier">
+<input type="submit" value="modifier" class="bouton">
 </form>
-
+</div>
 ';
 
 

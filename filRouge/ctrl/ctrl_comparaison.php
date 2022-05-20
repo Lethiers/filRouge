@@ -24,7 +24,24 @@ foreach($tabloprevision as $value){
 echo '</select>';
 echo '<input type="submit" value="comparer" class="bouton">';
 echo '</form>';
+
+// choix du champ a comparer
+
+
+echo'
+<div class="containerSelect">
+<img src="./asset/image/licorneInterogate.png" alt="">
+<h2>vous pouvez comparer les dépenses prévu avec les dépenses saisies :</h2>
+    <p>Il suffit de choisir un des champs enregistré.</p>
+    <ul>
+        <li><a href="">loisir</a></li>
+        <li><a href="">plaisir</a></li>
+    </ul>
+</div>';
+
+// fin div container du debut
 echo '</div>';
+
 
 ///////////////////////////////////// EN COURS  //////////////////////////////////
 // reussir a afficher les operations selon un selecteur
@@ -94,11 +111,14 @@ if (isset($_POST['prevision']) && !empty($_POST['prevision'])) {
                 }
             }
         }
-
-
 }
-
 var_dump($tabloprevisionGlobal);
+// var_dump($tabloCatGlobal);
+// var_dump($tabloCatUtil);
+// var_dump($tabloOpTotalPos);
+// var_dump($operationNeg);
+
+// lancer le script en fonction des tableaux reçu
 // echo '<script>', 'diagramme(["loisir","plaisir","restaurant","banque"],[140,500,800,300]);', '</script>';
 echo '<script>', 'diagramme(["loisir:Dépense","Loisir:Prevision"],[80,500]);', '</script>';
 
