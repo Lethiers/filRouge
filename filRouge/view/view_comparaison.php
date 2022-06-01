@@ -9,13 +9,15 @@
     <form action="" method="post">
         <img src="./asset/image/gateau.png" alt="">
         <h3>Choisir une date:</h3>
-        <p>pour comparer vos dépenses avec vos diagramme</p>
+        <p>afficher vos dépenses depuis une date précise</p>
         <input type="date" name="date_operation">
 
 
         <div class="chart_container">
         <canvas id="graph" aria-label="chart" role="img"></canvas>
         </div>
+        <input type="submit" value="comparer" class="bouton">
+        </form>
 
 
 
