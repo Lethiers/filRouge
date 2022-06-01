@@ -188,6 +188,20 @@ class Avoir{
         }
     }
 
+    // test full join avec la table prevision
+    public function fullJoinPrevision($bdd,$idprevision):array{
+        try {
+            $req=$bdd->prepare('SELECT * FROM prevision FULL JOIN avoir WHERE avoir.id_prevision=:id_prevision');
+            $req->execute(array(
+                'id_prevision' => $idprevision,
+            ));
+            $data = $req->fetchAll(PDO::FETCH_OBJ);
+            return $data;
+        } catch (Exception $e) {
+            die('Erreur :' .$e->getMessage());
+        }
+    }
+
 
 
 }

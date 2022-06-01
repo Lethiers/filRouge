@@ -9,7 +9,7 @@
     <form action="" method="post">
         <img src="./asset/image/gateau.png" alt="">
         <h3>Choisir une date:</h3>
-        <p>afficher vos dépenses depuis une date précise</p>
+        <p>N'oubliez pas de choisir une date précise</p>
         <input type="date" name="date_operation">
 
 
