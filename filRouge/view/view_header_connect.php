@@ -13,22 +13,22 @@
     <div class="menu">
       <ul>
         <li>
-          <button><a href="/filRouge/deconnexion">deconnexion</a></button>
+          <button><a href="/filRouge/deconnexion" title="vous pouvez vous déconnecté ici">deconnexion</a></button>
         </li>
         <li>
-          <button><a href="/filRouge/operation">operation</a></button>
+          <button><a href="/filRouge/operation"  title="vous enregistrez vos opération ici et retrouverez les operations saisies en dessous">1. operation</a></button>
         </li>
         <li>
-          <button><a href="/filRouge/prevision">prevision</a></button>
+          <button><a href="/filRouge/prevision" title="il faut créer une prévision pour pouvoir comparer les dépenses prévus avec vos opérations">2. prevision</a></button>
         </li>
         <li>
-          <button><a href="/filRouge/categorieUtilisateur">categorie</a></button>
+          <button><a href="/filRouge/categorieUtilisateur" title="si les catégories globales ne suffisent pas vous pourez toujours vous en créer">categorie</a></button>
         </li>
         <li>
-          <button><a href="/filRouge/comparaison">comparer</a></button>
+          <button><a href="/filRouge/comparaison" title="vous pouvez comparer les dépenses prévus avec vos opérations">3. comparer</a></button>
         </li>
         <li>
-          <button><a href="/filRouge/compte">compte</a></button>
+          <button><a href="/filRouge/compte" title="vous retrouverez les informations concernant votre compte">compte</a></button>
         </li>
       </ul>
     </div>

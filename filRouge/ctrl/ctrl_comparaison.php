@@ -118,16 +118,10 @@ if ($_GET['idPrevision'] && !empty($_GET['idPrevision'])) {
     $AffichageTabloMontant = $tabloMontant;
 }
 
+
 // je convertis les données au format json pour utiliser les datas avec chartJs
 $tabloNomJson = json_encode($AffichageTabloNom);
 $tabloMontantJson = json_encode($AffichageTabloMontant);
 
 echo '<script>', 'diagramme('.$tabloNomJson.','.$tabloMontantJson.');', '</script>';
-
-
-
-
-
-
-
 ?>

@@ -60,7 +60,7 @@ foreach($tab as $value){
     echo '<option value ='.$value->id_prevision.' name='.$value->id_prevision.'>  '.$value->nom_prevision.'</a> </option>';
 }
 echo '</select>';
-echo '<input type="submit" value="voir" class="bouton">';
+echo '<input type="submit" value="créer/voir/modifier" class="bouton">';
 echo '</form>';
 echo '</div>';
 ///////////////////////////// OK AU DESSUS créer une prevision puis la voir //////////////

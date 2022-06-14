@@ -15,10 +15,10 @@
     <div class="menu">
       <ul>
         <li>
-          <button><a href="/filRouge/inscription">inscription</a></button>
+          <button><a href="/filRouge/inscription" title="par ici pour vous inscrire">inscription</a></button>
         </li>
         <li>
-          <button><a href="/filRouge/connexion">Connexion</a></button>
+          <button><a href="/filRouge/connexion" title="par ici pour vous connecter">Connexion</a></button>
         </li>
       </ul>
     </div>
