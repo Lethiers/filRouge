@@ -7,10 +7,13 @@
 
 
     <form action="" method="post">
+
         <img src="./asset/image/gateau.png" alt="">
         <h3>Choisir une date:</h3>
         <p>N'oubliez pas de choisir une date précise</p>
+        <div class="top_container">
         <input type="date" name="date_operation">
+        </div>
 
 
         <div class="chart_container">

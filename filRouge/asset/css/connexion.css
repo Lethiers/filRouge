@@ -22,8 +22,9 @@ form{
     border: solid 1px lightgray;
     border-radius: 5px 5px;
     width: 50vh;
-    height: 65vh;
+    height: auto;
     color: black;   
+    padding-bottom: 5vh; 
 }
 
 img{

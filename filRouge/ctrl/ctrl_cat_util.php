@@ -19,7 +19,7 @@ $message = "";
 // voir les categorie global sous forme de checkbox
 $categorieGlobal = new CategorieGlobal();
 echo '<select name="catGlobal" class="bouton">
-<option value="" >--merci de selecitonner une catégorie global--</option>';
+<option value="" >selecitonner une catégorie global</option>';
 $tab = $categorieGlobal->showAllCategorieGlobal($bdd);
 foreach($tab as $value){
 
